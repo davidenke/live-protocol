@@ -1,0 +1,15 @@
+:host {
+  ---xlp-content-margin: var(--xlp-content-margin, 10);
+  ---xlp-content-size: var(--xlp-content-size, 12);
+}
+
+:host {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: calc(var(---xlp-content-margin) * var(---xlp-rel-mm));
+  font-size: calc(var(---xlp-content-size) * var(---xlp-rel-pt));
+  
+  color: #000;
+  background-color: #fff;
+}

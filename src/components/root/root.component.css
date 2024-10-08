@@ -1,0 +1,48 @@
+:host {
+  display: flex;
+  flex-flow: column nowrap;
+
+  box-sizing: border-box;
+  height: 100svh;
+  padding: 0;
+
+  color: #f4f4f4;
+
+  background: #333;
+
+  font-size: 14px;
+  font-family: 'Inter Tight Variable', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+main {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1;
+
+  align-items: center;
+  justify-content: center;
+}
+
+xlp-preview {
+  flex: 1;
+  min-height: 100svh;
+  min-width: 0;
+}
+
+@media print {
+  :host {
+    display: contents;
+  }
+
+  header {
+    display: none;
+  }
+
+  main {
+    display: block;
+    height: auto;
+  }
+}

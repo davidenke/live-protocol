@@ -4,18 +4,22 @@
   "version": "0.1.0",
   "identifier": "dev.enke.xmind-live-protocol.app",
   "build": {
-    "beforeDevCommand": "pnpm dev",
+    "beforeDevCommand": "vite dev",
     "devUrl": "http://localhost:5173",
-    "beforeBuildCommand": "pnpm build",
+    "beforeBuildCommand": "vite build",
     "frontendDist": "../dist"
   },
   "app": {
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "xmind-live-protocol",
-        "width": 800,
-        "height": 600
+        "decorations": false,
+        "alwaysOnTop": false,
+        "hiddenTitle": true,
+        "titleBarStyle": "Transparent",
+        "dragDropEnabled": true,
+        "width": 595,
+        "height": 842
       }
     ],
     "security": {
