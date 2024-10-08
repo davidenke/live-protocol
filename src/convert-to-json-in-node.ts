@@ -25,9 +25,8 @@ await processXMind({
   filterMarkers: [],
 });
 
-await rename(
-  resolve(outputDir, 'output.json'),
-  resolve(outputDir, `${basename(inputFile, '.xmind')}.json`),
-);
+const givenName = resolve(outputDir, 'output.json');
+const newName = resolve(outputDir, `${basename(inputFile, '.xmind')}.json`);
+await rename(givenName, newName);
 
 info('XMind file processed');
