@@ -1,3 +1,4 @@
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 
@@ -37,5 +38,7 @@ export default defineConfig(async () => ({
   },
 
   // add type check directly to vite
-  plugins: [checker({ typescript: true })],
+  plugins: [checker({ typescript: true, overlay: false })],
+  // polyfill `node:events` as used by `xmind-model`
+  optimizeDeps: { esbuildOptions: { plugins: [NodeModulesPolyfillPlugin()] } },
 }));

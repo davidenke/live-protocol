@@ -37,23 +37,11 @@ export default eslintTs.config(
       // import sorting
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
-      'prettier/prettier': [
-        'error',
-        {},
-        {
-          usePrettierrc: true,
-        },
-      ],
+      'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
       // unused imports
       '@typescript-eslint/no-unused-vars': 'off',
-      'unused-imports/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-        },
-      ],
+      'unused-imports/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'unused-imports/no-unused-imports': 'error',
     },
   },

@@ -1,0 +1,6 @@
+:host {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 30px;
+  user-select: none;
+}
