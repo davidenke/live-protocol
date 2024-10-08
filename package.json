@@ -1,5 +1,5 @@
 {
-  "name": "live-protocol-report",
+  "name": "xmind-live-protocol",
   "version": "1.0.0",
   "description": "",
   "bin": "dist/index.js",
