@@ -11,6 +11,7 @@
   width: var(---xlp-icon-size);
   height: var(---xlp-icon-size);
   color: inherit;
+  cursor: default;
   font-variation-settings: inherit;
   font-weight: 400;
   font-family: var(---xlp-icon-font);

@@ -1,0 +1,26 @@
+button {
+  all: unset;
+
+  display: flex;
+  flex-direction: row nowrap;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20%;
+  opacity: 0.7;
+
+  cursor: default;
+  user-select: none;
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background-color: color-mix(in srgb, currentcolor, transparent 90%);
+    }
+
+    &:active {
+      opacity: 1;
+      background-color: color-mix(in srgb, currentcolor, transparent 80%);
+    }
+  }
+}
