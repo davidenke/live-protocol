@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2.0.0",
-  "productName": "xmind-live-protocol",
+  "productName": "Xmind Live Protocol",
   "version": "0.1.0",
   "identifier": "dev.enke.xmind-live-protocol.app",
   "build": {
