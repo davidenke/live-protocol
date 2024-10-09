@@ -6,6 +6,10 @@
   "permissions": [
     "core:default",
     "core:window:default",
+    "core:window:allow-set-resizable",
+    "core:window:allow-set-size",
+    "core:window:allow-set-title",
+    "core:window:allow-set-title-bar-style",
     "core:window:allow-start-dragging",
     "fs:default",
     "fs:allow-watch",

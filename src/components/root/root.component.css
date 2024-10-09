@@ -17,6 +17,11 @@
   font-style: normal;
 }
 
+:host(:not([has-document])) {
+  cursor: default;
+  user-select: none;
+}
+
 main {
   display: flex;
   flex-flow: row nowrap;
@@ -24,6 +29,10 @@ main {
 
   align-items: center;
   justify-content: center;
+}
+
+xlp-title-bar {
+  z-index: 1;
 }
 
 xlp-preview {

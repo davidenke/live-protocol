@@ -13,13 +13,11 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "decorations": false,
-        "alwaysOnTop": false,
-        "hiddenTitle": true,
-        "titleBarStyle": "Transparent",
+        "title": "",
+        "titleBarStyle": "Overlay",
         "dragDropEnabled": true,
-        "width": 595,
-        "height": 842
+        "width": 400,
+        "height": 210
       }
     ],
     "security": {
