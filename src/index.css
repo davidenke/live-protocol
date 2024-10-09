@@ -9,6 +9,9 @@
    */
   ---xlp-rel-mm: calc(100cqmin / 210);
   ---xlp-rel-pt: calc(var(---xlp-rel-mm) * 0.352778);
+
+  /* typography */
+  --xlp-icon-font: 'Material Symbols Outlined Variable', monospace;
 }
 
 html {

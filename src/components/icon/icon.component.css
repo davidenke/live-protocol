@@ -1,0 +1,45 @@
+/* https://github.com/material-components/material-web/blob/main/icon/internal/_icon.scss */
+/* https://fonts.google.com/icons */
+
+:host {
+  ---xlp-icon-font: var(--xlp-icon-font, monospace);
+  ---xlp-icon-size: var(--xlp-icon-size, 24px);
+}
+
+:host {
+  font-size: var(---xlp-icon-size);
+  width: var(---xlp-icon-size);
+  height: var(---xlp-icon-size);
+  color: inherit;
+  font-variation-settings: inherit;
+  font-weight: 400;
+  font-family: var(---xlp-icon-font);
+  display: inline-flex;
+  font-style: normal;
+  place-items: center;
+  place-content: center;
+  line-height: 1;
+  overflow: hidden;
+  letter-spacing: normal;
+  text-transform: none;
+  user-select: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  flex-shrink: 0;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::slotted(svg) {
+  fill: currentColor;
+}
+
+::slotted(*) {
+  height: 100%;
+  width: 100%;
+
+  font-size: var(---xlp-icon-size);
+  font-weight: inherit;
+}
