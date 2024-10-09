@@ -58,7 +58,7 @@ export class Root extends LitElement {
     await this.#window.setResizable(false);
     await this.#window.setTitleBarStyle('overlay');
     await this.#window.setTitle(title);
-    await this.#window.setSize(new LogicalSize(400, 210));
+    await this.#window.setSize(new LogicalSize(250, 250));
   }
 
   // view: preview file (filePath !== undefined)
@@ -88,10 +88,7 @@ export class Root extends LitElement {
           !this.hasDocument,
           () => html`
             <xlp-title-bar role="banner"></xlp-title-bar>
-            <xlp-select-file @path="${this.loadFile}">
-              <xlp-icon>place_item</xlp-icon>
-              Xmind-Datei hier ablegen
-            </xlp-select-file>
+            <xlp-select-file @path="${this.loadFile}"><xlp-icon>upload_file</xlp-icon></xlp-select-file>
           `,
           () => html`
             <xlp-preview>${unsafeHTML(this.contents)}</xlp-preview>

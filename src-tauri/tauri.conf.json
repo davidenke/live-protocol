@@ -17,8 +17,8 @@
         "title": "",
         "titleBarStyle": "Overlay",
         "dragDropEnabled": true,
-        "width": 400,
-        "height": 210
+        "width": 250,
+        "height": 250
       }
     ],
     "security": {
