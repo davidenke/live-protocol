@@ -7,8 +7,24 @@ import styles from './preview.component.css?inline';
 export class Preview extends LitElement {
   static override readonly styles = unsafeCSS(styles);
 
-  override render() {
-    return html`<slot></slot>`;
+  #slotElements: ChildNode[] = [];
+
+  override createRenderRoot() {
+    return this;
+  }
+
+  override connectedCallback() {
+    this.#slotElements = Array.from(this.childNodes);
+    super.connectedCallback();
+  }
+
+  protected override render() {
+    return html`
+      <article>${this.#slotElements}</article>
+      <style>
+        ${Preview.styles}
+      </style>
+    `;
   }
 }
 

@@ -1,15 +1,54 @@
-:host {
+xlp-preview {
   ---xlp-content-margin: var(--xlp-content-margin, 10);
-  ---xlp-content-size: var(--xlp-content-size, 12);
+  ---xlp-content-size: var(--xlp-content-size, 14);
 }
 
-:host {
+xlp-preview {
   box-sizing: border-box;
   display: flex;
   flex-flow: column nowrap;
   padding: calc(var(---xlp-content-margin) * var(---xlp-rel-mm));
   font-size: calc(var(---xlp-content-size) * var(---xlp-rel-pt));
-  
+
   color: #000;
   background-color: #fff;
+
+  > article {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6,
+    > p,
+    > ul,
+    > ol,
+    > blockquote,
+    > pre {
+      margin: 0 0 calc(12 * var(---xlp-rel-pt));
+    }
+
+    h1 {
+      font-size: 1.75em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    h3 {
+      font-size: 1.25em;
+    }
+
+    h4,
+    h5,
+    h6 {
+      font-size: 1em;
+    }
+
+    ul,
+    ol {
+      padding-inline-start: calc(12 * var(---xlp-rel-pt));
+    }
+  }
 }
