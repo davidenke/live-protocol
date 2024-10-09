@@ -21,6 +21,7 @@
     "@tauri-apps/api": "2.0.2",
     "@tauri-apps/plugin-fs": "2.0.0",
     "@tauri-apps/plugin-shell": "2.0.0",
+    "@tauri-apps/plugin-updater": "~2",
     "jszip": "3.10.1",
     "lit": "3.2.1",
     "marked": "14.1.2",
