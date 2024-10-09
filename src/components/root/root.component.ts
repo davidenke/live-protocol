@@ -50,6 +50,7 @@ export class Root extends LitElement {
     this.contents = undefined;
     this.hasDocument = false;
     await this.#setNoDocumentView('');
+    this.#listeners.forEach(remove => remove());
   }
 
   // view: select file (filePath === undefined)
@@ -66,6 +67,8 @@ export class Root extends LitElement {
     await this.#window.setResizable(true);
     await this.#window.setTitleBarStyle('transparent');
     await this.#window.setTitle(title);
+    const close = await this.#window.onCloseRequested(() => this.closeFile());
+    this.#listeners.push(close);
   }
 
   constructor() {
