@@ -1,6 +1,6 @@
 {
   "name": "xmind-live-protocol",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "bin": "dist/index.js",
   "type": "module",
