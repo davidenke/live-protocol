@@ -1,5 +1,8 @@
+import '../icon/icon.component.js';
+import '../icon-button/icon-button.component.js';
+
 import { html, LitElement, unsafeCSS } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, eventOptions, property } from 'lit/decorators.js';
 
 import styles from './tool-bar.component.css?inline';
 
@@ -43,6 +46,11 @@ export class ToolBar extends LitElement {
     this.#isInteractive = false;
   };
 
+  @eventOptions({ capture: true })
+  handleClose() {
+    this.dispatchEvent(new CustomEvent('close'));
+  }
+
   override connectedCallback() {
     super.connectedCallback();
 
@@ -67,14 +75,17 @@ export class ToolBar extends LitElement {
   override render() {
     return html`
       <nav>
-        <button>Foo</button>
-        <button>Bar</button>
+        <xlp-icon-button @click="${this.handleClose}"><xlp-icon>close</xlp-icon></xlp-icon-button>
       </nav>
     `;
   }
 }
 
 declare global {
+  interface HTMLElementEventMap {
+    close: CustomEvent<void>;
+  }
+
   interface HTMLElementTagNameMap {
     'xlp-tool-bar': ToolBar;
   }
