@@ -13,6 +13,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
+        "acceptFirstMouse": true,
         "title": "",
         "titleBarStyle": "Overlay",
         "dragDropEnabled": true,
