@@ -7,7 +7,74 @@ on:
   workflow_dispatch:
 
 jobs:
+  prepare:
+    name: Prepare
+    permissions:
+      contents: write
+      id-token: write
+    outputs:
+      hash: ${{ steps.result.outputs.hash }}
+      version: ${{ steps.result.outputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.9.0
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - name: install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: setup Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: install dependencies
+        run: |
+          pnpm install --global release-it @release-it/conventional-changelog
+          cargo install cargo-bump
+
+      - name: prepare release
+        run: |
+          git config user.email "${{ vars.GIT_EMAIL }}"
+          git config user.name "${{ vars.GIT_USER }}"
+          release-it \
+            --ci \
+            --npm.skipChecks \
+            --no-npm.publish \
+            --github.release \
+            --github.autoGenerate \
+            --git.commitMessage='chore: release ${version} [skip actions]' \
+            --git.pushArgs=--follow-tags \
+            --plugins.@release-it/conventional-changelog.infile=CHANGELOG.md \
+            --plugins.@release-it/conventional-changelog.header='# Xmind Live Protocol' \
+            --plugins.@release-it/conventional-changelog.preset=angular \
+            --hooks.before:release='echo "$(jq '\''.version="${version}"'\'' src-tauri/tauri.conf.json)" > src-tauri/tauri.conf.json' \
+            --hooks.before:release='cargo bump --manifest-path src-tauri/Cargo.toml ${version}' \
+            --hooks.before:release='git add src-tauri/tauri.conf.json src-tauri/Cargo.toml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: provide version and commit hash
+        id: result
+        run: |
+          echo "hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "version=$(node -e "console.log(require('./package.json').version);")" >> "$GITHUB_OUTPUT"
+
   release:
+    needs: prepare
     name: Release
     permissions:
       contents: write
@@ -15,18 +82,26 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: "macos-latest"
+          - name: "macOS (Apple Silicon)"
+            platform: "macos-latest"
             args: "--target aarch64-apple-darwin"
-          - platform: "macos-latest"
+          - name: "macOS (Intel)"
+            platform: "macos-latest"
             args: "--target x86_64-apple-darwin"
-          - platform: "ubuntu-22.04"
+          - name: "Ubuntu"
+            platform: "ubuntu-22.04"
             args: ""
-          - platform: "windows-latest"
+          - name: "Windows"
+            platform: "windows-latest"
             args: ""
 
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare.outputs.hash }}
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-22.04'
@@ -63,9 +138,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: __VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
+          tagName: __VERSION__
           releaseName: "Xmind Live Protocol __VERSION__"
-          releaseBody: "See the assets to download this version and install."
-          releaseDraft: false
-          prerelease: false
           args: ${{ matrix.args }}
+
+      - run: echo "Released ${{ needs.prepare.outputs.version }} for ${{ matrix.name }} :rocket:" >> $GITHUB_STEP_SUMMARY
