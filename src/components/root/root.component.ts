@@ -37,6 +37,12 @@ export class Root extends LitElement {
     this.#listeners.push(remove);
   }
 
+  @eventOptions({ passive: true })
+  closeFile() {
+    this.filePath = undefined;
+    this.fileContent = undefined;
+  }
+
   override disconnectedCallback() {
     super.disconnectedCallback();
     this.#listeners.forEach(remove => remove());
@@ -56,7 +62,7 @@ export class Root extends LitElement {
           `,
           () => html`
             <xlp-preview>${unsafeHTML(this.fileContent)}</xlp-preview>
-            <xlp-tool-bar role="navigation" hide-after="2000"></xlp-tool-bar>
+            <xlp-tool-bar role="navigation" hide-after="2000" @close="${this.closeFile}"></xlp-tool-bar>
           `,
         )}
       </main>
