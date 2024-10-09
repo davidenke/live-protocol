@@ -11,6 +11,7 @@
   ---xlp-rel-pt: calc(var(---xlp-rel-mm) * 0.352778);
 
   /* typography */
+  --xlp-text-font: 'Inter Tight Variable', sans-serif;
   --xlp-icon-font: 'Material Symbols Outlined Variable', monospace;
 }
 
