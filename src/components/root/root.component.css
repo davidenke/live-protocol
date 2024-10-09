@@ -35,6 +35,11 @@ xlp-title-bar {
   z-index: 1;
 }
 
+xlp-tool-bar {
+  position: fixed;
+  inset: 10px 10px auto auto;
+}
+
 xlp-preview {
   flex: 1;
   min-height: 100svh;
