@@ -1,4 +1,5 @@
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 
@@ -36,6 +37,9 @@ export default defineConfig(async () => ({
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
   },
+
+  // add vendor prefixes to CSS automatically as needed
+  css: { postcss: { plugins: [autoprefixer] } },
 
   // add type check directly to vite
   plugins: [checker({ typescript: true, overlay: false })],
