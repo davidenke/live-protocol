@@ -1,6 +1,6 @@
 {
   "name": "xmind-live-protocol",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "",
   "bin": "dist/index.js",
   "type": "module",
@@ -10,7 +10,6 @@
     "dev": "tauri dev",
     "build": "tauri build"
   },
-  "keywords": [],
   "author": {
     "email": "david@enke.dev",
     "name": "David Enke"
