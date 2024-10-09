@@ -14,6 +14,7 @@
     "fs:default",
     "fs:allow-watch",
     "fs:allow-unwatch",
-    "shell:allow-open"
+    "shell:allow-open",
+    "dialog:default"
   ]
 }
