@@ -1,0 +1,21 @@
+:host {
+  position: fixed;
+  inset: 30px 30px auto auto;
+
+  display: block;
+  transition: 0.3s ease-in-out opacity;
+
+  background-color: red;
+}
+
+:host([hidden]) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+nav {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+  padding: 10px;
+}
