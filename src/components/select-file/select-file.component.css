@@ -6,11 +6,13 @@
   flex: 1;
   align-items: center;
   justify-content: center;
+
+  user-select: none;
 }
 
 slot {
   display: flex;
-  padding: 40px;
+  padding: 20px;
 
   flex-flow: row nowrap;
   gap: 20px;
@@ -19,8 +21,10 @@ slot {
   border: 3px dashed #666;
   border-radius: 20px;
 
-  color: #c2c2c2;
-  font-size: 1.2em;
+  color: #666;
+
+  --xlp-icon-size: 100px;
+  font-variation-settings: 'wght' 150;
 
   :host([dragged-over]) & {
     border-color: #f4f4f4;
