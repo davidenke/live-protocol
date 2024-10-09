@@ -1,3 +1,4 @@
+import '../icon/icon.component.js';
 import '../preview/preview.component.js';
 import '../title-bar/title-bar.component.js';
 import '../tool-bar/tool-bar.component.js';
@@ -49,8 +50,13 @@ export class Root extends LitElement {
       <main>
         ${when(
           this.filePath === undefined,
-          () => html`<xlp-select-file @path="${this.loadFile}">Xmind-Datei hier ablegen</xlp-select-file>`,
           () => html`<xlp-preview>${unsafeHTML(this.fileContent)}</xlp-preview>`,
+          () => html`
+            <xlp-select-file @path="${this.loadFile}">
+              <xlp-icon>place_item</xlp-icon>
+              Xmind-Datei hier ablegen
+            </xlp-select-file>
+          `,
         )}
       </main>
     `;

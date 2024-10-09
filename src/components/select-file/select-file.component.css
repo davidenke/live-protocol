@@ -2,14 +2,19 @@
   display: flex;
   height: 100%;
   width: 100%;
+
   flex: 1;
   align-items: center;
   justify-content: center;
 }
 
 slot {
-  display: block;
+  display: flex;
   padding: 40px;
+
+  flex-flow: row nowrap;
+  gap: 20px;
+  align-items: center;
 
   border: 3px dashed #666;
   border-radius: 20px;
