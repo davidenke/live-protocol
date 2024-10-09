@@ -1,5 +1,6 @@
 import '../preview/preview.component.js';
 import '../title-bar/title-bar.component.js';
+import '../tool-bar/tool-bar.component.js';
 import '../select-file/select-file.component.js';
 
 import { html, LitElement, unsafeCSS } from 'lit';
@@ -17,7 +18,7 @@ import styles from './root.component.css?inline';
 export class Root extends LitElement {
   static override readonly styles = unsafeCSS(styles);
 
-  #listeners: (() => void)[] = [];
+  #listeners: Array<() => void> = [];
 
   @state()
   private filePath?: string;
@@ -43,6 +44,8 @@ export class Root extends LitElement {
   override render() {
     return html`
       <xlp-title-bar role="banner"></xlp-title-bar>
+      <xlp-tool-bar role="navigation" hide-after="500"></xlp-tool-bar>
+
       <main>
         ${when(
           this.filePath === undefined,
