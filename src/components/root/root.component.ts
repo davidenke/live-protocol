@@ -45,17 +45,18 @@ export class Root extends LitElement {
   override render() {
     return html`
       <xlp-title-bar role="banner"></xlp-title-bar>
-      <xlp-tool-bar role="navigation" hide-after="500"></xlp-tool-bar>
-
       <main>
         ${when(
           this.filePath === undefined,
-          () => html`<xlp-preview>${unsafeHTML(this.fileContent)}</xlp-preview>`,
           () => html`
             <xlp-select-file @path="${this.loadFile}">
               <xlp-icon>place_item</xlp-icon>
               Xmind-Datei hier ablegen
             </xlp-select-file>
+          `,
+          () => html`
+            <xlp-preview>${unsafeHTML(this.fileContent)}</xlp-preview>
+            <xlp-tool-bar role="navigation" hide-after="2000"></xlp-tool-bar>
           `,
         )}
       </main>
