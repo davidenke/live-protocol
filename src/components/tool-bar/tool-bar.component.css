@@ -1,7 +1,4 @@
 :host {
-  position: fixed;
-  inset: 30px 30px auto auto;
-
   display: block;
   transition: 0.3s ease-in-out opacity;
   user-select: none;
