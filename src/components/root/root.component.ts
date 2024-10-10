@@ -12,11 +12,10 @@ import { when } from 'lit/directives/when.js';
 import { parse } from 'marked';
 
 import { convertToMarkdown } from '../../utils/conversion.utils.js';
-import { readAndWatchFile } from '../../utils/file.utils.js';
+import { getFileName, readAndWatchFile } from '../../utils/file.utils.js';
 import { readMindMap } from '../../utils/xmind.utils.js';
 import styles from './root.component.css?inline';
 
-// TODO organize views better
 @customElement('xlp-root')
 export class Root extends LitElement {
   static override readonly styles = unsafeCSS(styles);
@@ -47,7 +46,7 @@ export class Root extends LitElement {
     this.#listeners.push(remove);
 
     this.hasDocument = true;
-    await this.#setDocumentView(path.slice(path.lastIndexOf('/') + 1));
+    await this.#setDocumentView(getFileName(path));
   }
 
   @eventOptions({ passive: true })
