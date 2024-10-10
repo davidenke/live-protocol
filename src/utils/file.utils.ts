@@ -20,3 +20,7 @@ export async function readAndWatchFile(path: string, onData: (data: Uint8Array) 
     }
   });
 }
+
+export function getFileName(path: string): string {
+  return path.slice(path.search(/[\\|/](?:.(?![\\|/]))+$/) + 1);
+}
