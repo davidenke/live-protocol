@@ -5,6 +5,7 @@
   "bin": "dist/index.js",
   "type": "module",
   "scripts": {
+    "prepare": "tauri icon src/assets/icons/app.icon.png",
     "lint": "eslint -c eslint.config.js src/**/*.ts",
     "test": "vitest",
     "dev": "tauri dev",

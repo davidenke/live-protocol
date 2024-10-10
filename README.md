@@ -100,6 +100,21 @@ To build the application for distribution, you can run the following command:
 pnpm build
 ```
 
+## Icons
+
+### App icon
+
+Most of the app icons are generated after installation.
+
+The only exception is the macOS icon, which is configured to be used from the [`./src/assets/icons/app.icon.icns` path](./src/assets/icons/app.icon.icns) directly.
+
+This icon is sourced from its Adobe Illustrator file [`./src/assets/icons/app.icns.ai`](./src/assets/icons/app.icns.ai). Once opened and edited, the icons has to be exported in [eight different sizes as PNGs and converted properly](https://gist.github.com/jamieweavis/b4c394607641e1280d447deed5fc85fc).\
+To export the files properly, use the Illustrator export dialog (`File → Export → Export for Screens...`). A preset can be imported from the [`./src/assets/icons/app.icns.preset`](./src/assets/icons/app.icns.preset) file.\
+Output the files to the to be created [`./src/assets/icons/icon.iconset`](./src/assets/icons/icon.iconset) folder.\
+Then, this folder is converted to an ICNS file using the `iconutil` command on macOS: `iconutil --convert icns --output src/assets/icons/app.icon.icns src/assets/icons/icon.iconset`.
+
+```bash
+
 [Rust]: https://www.rust-lang.org/
 [pnpm]: https://pnpm.io/
 [Tauri]: https://tauri.app/
@@ -107,3 +122,4 @@ pnpm build
 [Node.js]: https://nodejs.org/
 [nvm-nix]: https://github.com/nvm-sh/nvm
 [nvm-win]: https://github.com/coreybutler/nvm-windows
+```

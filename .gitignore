@@ -12,6 +12,8 @@ node_modules
 dist
 dist-ssr
 *.local
+src/assets/icons/icon.iconset/*
+!src/assets/icons/icon.iconset/.gitkeep
 
 # Editor directories and files
 .vscode/*
