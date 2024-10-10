@@ -1,6 +1,6 @@
 [package]
 name = "xmind-live-protocol"
-version = "0.0.1"
+version = "0.1.0"
 description = "Generate protocols from Xmind files"
 authors = ["David Enke<david@enke.dev>"]
 edition = "2021"
