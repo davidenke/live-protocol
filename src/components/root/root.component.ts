@@ -37,7 +37,12 @@ export class Root extends LitElement {
   async loadFile({ detail: path }: CustomEvent<string>) {
     const remove = await readAndWatchFile(path, async data => {
       const workbook = await readMindMap(data);
-      this.contents = await parse(convertToMarkdown(workbook));
+      this.contents = await parse(
+        convertToMarkdown(workbook, {
+          useHeadlinesUntilLevel: 2,
+          useListsUntilLevel: Infinity,
+        }),
+      );
     });
     this.#listeners.push(remove);
 
