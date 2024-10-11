@@ -63,7 +63,8 @@ jobs:
             --plugins.@release-it/conventional-changelog.preset=angular \
             --hooks.before:release='echo "$(jq '\''.version="${version}"'\'' src-tauri/tauri.conf.json)" > src-tauri/tauri.conf.json' \
             --hooks.before:release='cargo bump --manifest-path src-tauri/Cargo.toml ${version}' \
-            --hooks.before:release='git add src-tauri/tauri.conf.json src-tauri/Cargo.toml'
+            --hooks.before:release='cargo update --manifest-path src-tauri/Cargo.toml --precise ${version} xmind-live-protocol' \
+            --hooks.before:release='git add src-tauri/tauri.conf.json src-tauri/Cargo.toml src-tauri/Cargo.lock'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
