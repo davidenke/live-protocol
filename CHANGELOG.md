@@ -1,5 +1,22 @@
 # Xmind Live Protocol
 
+# [0.2.0](https://github.com/davidenke/xmind-live-protocol/compare/0.1.0...0.2.0) (2024-10-11)
+
+
+### Bug Fixes
+
+* get file name on windows ([ee0f793](https://github.com/davidenke/xmind-live-protocol/commit/ee0f793875ee21f565380e5aac2a6067c84ef6d6))
+* numbering of nested ordered lists ([cca9184](https://github.com/davidenke/xmind-live-protocol/commit/cca9184d29cee1aca4a4575d723da1967a501d09))
+
+
+### Features
+
+* add custom icon ([3aa4c3c](https://github.com/davidenke/xmind-live-protocol/commit/3aa4c3c17a492be780e2404676336876f0f29c0e))
+* apply options in conversion properly ([753d70f](https://github.com/davidenke/xmind-live-protocol/commit/753d70f2f202b75d109d92f640c44f97e8437b06))
+* configurable conversion options ([c873434](https://github.com/davidenke/xmind-live-protocol/commit/c87343440270f7b9dd44c85dd6f9f1adf4455b91))
+* limit visible levels optionally ([a8f3f73](https://github.com/davidenke/xmind-live-protocol/commit/a8f3f73af3476dc5277570f69fa7996673c849dc))
+* **xlp-numeric-stepper:** introduce component ([2f5f6b6](https://github.com/davidenke/xmind-live-protocol/commit/2f5f6b64fec48bfac96c1d9c290431073aff742d))
+
 # 0.1.0 (2024-10-10)
 
 
