@@ -26,6 +26,7 @@ export class Root extends LitElement {
 
   @state()
   conversionOptions: ConversionOptions = {
+    useUntilLevel: Infinity,
     useHeadlinesUntilLevel: 2,
     useOrderedListsUntilLevel: 4,
     useUnorderedListsUntilLevel: Infinity,
@@ -64,8 +65,21 @@ export class Root extends LitElement {
   }
 
   @eventOptions({ passive: true })
+  setVisibilityLevel({ detail: value }: CustomEvent<number>) {
+    const useUntilLevel = Math.max(1, value ?? Infinity);
+    this.conversionOptions = {
+      ...this.conversionOptions,
+      useUntilLevel,
+      useHeadlinesUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useHeadlinesUntilLevel) as 0,
+      useOrderedListsUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useOrderedListsUntilLevel),
+      useUnorderedListsUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useUnorderedListsUntilLevel),
+    };
+    this.renderContents();
+  }
+
+  @eventOptions({ passive: true })
   setHeadlineLevel({ detail: value }: CustomEvent<number>) {
-    const useHeadlinesUntilLevel = (value as 0) ?? 2;
+    const useHeadlinesUntilLevel = Math.min(this.conversionOptions.useUntilLevel, value ?? 2) as 0;
     this.conversionOptions = {
       ...this.conversionOptions,
       useHeadlinesUntilLevel,
@@ -77,13 +91,19 @@ export class Root extends LitElement {
 
   @eventOptions({ passive: true })
   setOrderedListLevel({ detail: value }: CustomEvent<number>) {
-    this.conversionOptions = { ...this.conversionOptions, useOrderedListsUntilLevel: value ?? 4 };
+    this.conversionOptions = {
+      ...this.conversionOptions,
+      useOrderedListsUntilLevel: Math.min(this.conversionOptions.useUntilLevel, value ?? 4),
+    };
     this.renderContents();
   }
 
   @eventOptions({ passive: true })
   setUnorderedListLevel({ detail: value }: CustomEvent<number>) {
-    this.conversionOptions = { ...this.conversionOptions, useUnorderedListsUntilLevel: value ?? Infinity };
+    this.conversionOptions = {
+      ...this.conversionOptions,
+      useUnorderedListsUntilLevel: Math.min(this.conversionOptions.useUntilLevel, value ?? Infinity),
+    };
     this.renderContents();
   }
 
@@ -133,9 +153,17 @@ export class Root extends LitElement {
             <xlp-preview>${unsafeHTML(this.contents)}</xlp-preview>
             <xlp-tool-bar role="navigation" hide-after="2000">
               <xlp-numeric-stepper
+                @change="${this.setVisibilityLevel}"
+                min="1"
+                value="${this.conversionOptions.useUntilLevel}"
+              >
+                <xlp-icon>visibility</xlp-icon>
+              </xlp-numeric-stepper>
+
+              <xlp-numeric-stepper
                 @change="${this.setHeadlineLevel}"
                 min="0"
-                max="6"
+                max="${Math.max(this.conversionOptions.useUntilLevel, 6)}"
                 value="${this.conversionOptions.useHeadlinesUntilLevel}"
               >
                 <xlp-icon>title</xlp-icon>
@@ -144,6 +172,7 @@ export class Root extends LitElement {
               <xlp-numeric-stepper
                 @change="${this.setOrderedListLevel}"
                 min="${this.conversionOptions.useHeadlinesUntilLevel}"
+                max="${this.conversionOptions.useUntilLevel}"
                 value="${this.conversionOptions.useOrderedListsUntilLevel}"
               >
                 <xlp-icon>format_list_numbered</xlp-icon>
@@ -152,6 +181,7 @@ export class Root extends LitElement {
               <xlp-numeric-stepper
                 @change="${this.setUnorderedListLevel}"
                 min="${this.conversionOptions.useHeadlinesUntilLevel}"
+                max="${this.conversionOptions.useUntilLevel}"
                 value="${this.conversionOptions.useUnorderedListsUntilLevel}"
               >
                 <xlp-icon>format_list_bulleted</xlp-icon>
