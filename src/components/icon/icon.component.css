@@ -4,29 +4,33 @@
 :host {
   ---xlp-icon-font: var(--xlp-icon-font, monospace);
   ---xlp-icon-size: var(--xlp-icon-size, 24px);
+  ---xlp-icon-spacing: var(--xlp-icon-spacing, 0);
 }
 
 :host {
-  font-size: var(---xlp-icon-size);
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: var(---xlp-icon-spacing);
   width: var(---xlp-icon-size);
   height: var(---xlp-icon-size);
+  place-items: center;
+  place-content: center;
+
   color: inherit;
-  cursor: default;
+  font-size: var(---xlp-icon-size);
   font-variation-settings: inherit;
   font-weight: 400;
   font-family: var(---xlp-icon-font);
-  display: inline-flex;
   font-style: normal;
-  place-items: center;
-  place-content: center;
   line-height: 1;
-  overflow: hidden;
   letter-spacing: normal;
   text-transform: none;
-  user-select: none;
   white-space: nowrap;
   word-wrap: normal;
-  flex-shrink: 0;
+
+  cursor: default;
+  user-select: none;
+  overflow: hidden;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
