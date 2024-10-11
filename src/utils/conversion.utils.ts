@@ -7,6 +7,13 @@ export type MindMap = Workbook;
 
 export type ConversionOptions = {
   /**
+   * Topics until this level will be visible.
+   * Minimum value is 1, no maximum value, default is Infinity.
+   * @default Infinity
+   */
+  useUntilLevel: number;
+
+  /**
    * Topics until this level will be rendered as headlines.
    * Minimum value is 0, maximum value is 6, default is 2.
    * @default 2
@@ -30,6 +37,7 @@ export type ConversionOptions = {
 
 export function conversionOptionsWithDefaults(options: Partial<ConversionOptions> = {}): ConversionOptions {
   return {
+    useUntilLevel: Infinity,
     useHeadlinesUntilLevel: 2,
     useOrderedListsUntilLevel: 4,
     useUnorderedListsUntilLevel: Infinity,
@@ -59,12 +67,14 @@ export function convertSheetToMarkdown(sheet: Sheet, options: ConversionOptions)
  * Convert a single given topic into markdown.
  */
 export function convertTopicToMarkdown(topic: Topic, level: number, options: ConversionOptions): string {
+  const { useUntilLevel } = options;
   const text = convertTopicByLevel(topic, level, options);
+  if (level >= useUntilLevel) return text;
+
   const attachedTopics = topic
     .getChildrenByType(['attached'])
     .map(child => convertTopicToMarkdown(child, level + 1, options))
     .join('');
-
   return `${text}${attachedTopics}`;
 }
 
