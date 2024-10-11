@@ -1,6 +1,14 @@
 # Xmind live protocol
 
-An application to generate protocol documents from XMind mind maps.
+This application converts a mind map into a protocol document.\
+It creates a structured document from an XMind mind map file to be used as abstract or protocol.
+
+Once a mind map is opened, the protocol document will be updated automatically whenever the mind map is changed.
+
+<img src="./docs/example-transparent@1024.png" alt="Mind map with live protocol" width="800"/>
+
+While the preview is rendered from HTML, the internal representation of the mind maps structural data is generated as [Markdown](https://en.wikipedia.org/wiki/Markdown).\
+This allows for exporting the protocol document to a broad range of formats, such as plain text, PDF, or DOCX.
 
 ## Download
 
@@ -18,7 +26,6 @@ Other versions can be found on the [releases page](https://github.com/davidenke/
 Simply run the application and open an XMind mind map file (`*.xmind`) to generate a protocol document.\
 Xmind files can either be dragged onto the application window or opened via a file dialog after clicking the window.
 
-Once opened, the protocol document will be updated automatically whenever the mind map is changed (saved to disk).\
 To open another mind map, simply close the window with the current protocol document and open up a new one.
 
 ### Configure protocol document
@@ -28,7 +35,7 @@ To open another mind map, simply close the window with the current protocol docu
 In the top right corner of the window is a tool bar containing simple stepper buttons to customize the protocol document.\
 The tool bar will be hidden when not interacting with it, the cursor is not moved for a while, or the application window is not focused. Just focus the window again and move the cursor to show the tool bar again.
 
-<img src="./docs/tool-bar.png" alt="drawing" width="160"/>
+<img src="./docs/tool-bar.png" alt="Tool bar" width="160"/>
 
 All steppers can be clicked on the upwards or downwards arrow to increase or decrease the value.\
 The icon in the middle of the stepper can be clicked to reset the value to its default.\
