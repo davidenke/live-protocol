@@ -1,5 +1,13 @@
 # Xmind Live Protocol
 
+# [0.3.0](https://github.com/davidenke/xmind-live-protocol/compare/0.2.0...0.3.0) (2024-10-11)
+
+
+### Features
+
+* allow dragging files on opened document ([973ae3a](https://github.com/davidenke/xmind-live-protocol/commit/973ae3a8dadabd9abb75a3133f9a3a1a454c3828))
+* **xlp-select-file:** add background mode ([20b637b](https://github.com/davidenke/xmind-live-protocol/commit/20b637bf4c571fb509366cd17f95273b6bdaa1a8))
+
 # [0.2.0](https://github.com/davidenke/xmind-live-protocol/compare/0.1.0...0.2.0) (2024-10-11)
 
 
