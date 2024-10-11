@@ -11,15 +11,36 @@ Other versions can be found on the [releases page](https://github.com/davidenke/
 
 ## Usage
 
-Simply run the application and open an XMind mind map file (`*.xmind`) to generate a protocol document.
+> Mac users: Make sure to allow the app to run (system preferences → Security & Privacy → General) once you tried to open it unsuccessfully.
 
+### Open mind maps
+
+Simply run the application and open an XMind mind map file (`*.xmind`) to generate a protocol document.\
 Xmind files can either be dragged onto the application window or opened via a file dialog after clicking the window.
 
-Once opened, the protocol document will be updated automatically whenever the mind map is changed (saved to disk).
-
+Once opened, the protocol document will be updated automatically whenever the mind map is changed (saved to disk).\
 To open another mind map, simply close the window with the current protocol document and open up a new one.
 
-> Mac users: Make sure to allow the app to run (system preferences → Security & Privacy → General) once you tried to open it unsuccessfully.
+### Configure protocol document
+
+#### Tool bar
+
+In the top right corner of the window is a tool bar containing simple stepper buttons to customize the protocol document.\
+The tool bar will be hidden when not interacting with it, the cursor is not moved for a while, or the application window is not focused. Just focus the window again and move the cursor to show the tool bar again.
+
+<img src="./docs/tool-bar.png" alt="drawing" width="160"/>
+
+All steppers can be clicked on the upwards or downwards arrow to increase or decrease the value.\
+The icon in the middle of the stepper can be clicked to reset the value to its default.\
+The badge on the right side of the stepper shows the current value.
+
+Each stepper serves a different purpose:
+
+|         | Visible levels                                               | Headlines                                      | Numbered lists                                                                                   | Bullet lists                                                     |
+| ------- | ------------------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+|         | The number of levels of the mind map that should be visible. | The levels to be shown as headlines.           | The levels to be shown as numbered lists in the protocol document.                               | The levels to be shown as bullet lists in the protocol document. |
+| Limits  | At least 1 level must be visible.                            | At maximum 6 levels can be shown as headlines. | No limits for the number of levels, but numbering will be crazy if too many levels are selected. | No limits for the number of levels whatsoever.                   |
+| Default | An infinite number of levels is shown.                       | The first 2 levels are shown as headlines.     | Up to the first 4 levels are shown as numbered lists.                                            | All levels above are shown as bullet lists.                      |
 
 ---
 
