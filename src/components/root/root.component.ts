@@ -1,8 +1,9 @@
 import '../icon/icon.component.js';
+import '../numeric-stepper/numeric-stepper.component.js';
 import '../preview/preview.component.js';
+import '../select-file/select-file.component.js';
 import '../title-bar/title-bar.component.js';
 import '../tool-bar/tool-bar.component.js';
-import '../select-file/select-file.component.js';
 
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { html, LitElement, unsafeCSS } from 'lit';
@@ -11,7 +12,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 import { parse } from 'marked';
 
-import { convertToMarkdown } from '../../utils/conversion.utils.js';
+import { type ConversionOptions, convertToMarkdown, type MindMap } from '../../utils/conversion.utils.js';
 import { getFileName, readAndWatchFile } from '../../utils/file.utils.js';
 import { readMindMap } from '../../utils/xmind.utils.js';
 import styles from './root.component.css?inline';
@@ -22,6 +23,16 @@ export class Root extends LitElement {
 
   readonly #window = getCurrentWindow();
   readonly #listeners: Array<() => void> = [];
+
+  @state()
+  conversionOptions: ConversionOptions = {
+    useHeadlinesUntilLevel: 2,
+    useOrderedListsUntilLevel: 4,
+    useUnorderedListsUntilLevel: Infinity,
+  };
+
+  @state()
+  private mindMap?: MindMap;
 
   @state()
   private contents?: string;
@@ -35,13 +46,8 @@ export class Root extends LitElement {
   @eventOptions({ passive: true })
   async loadFile({ detail: path }: CustomEvent<string>) {
     const remove = await readAndWatchFile(path, async data => {
-      const workbook = await readMindMap(data);
-      this.contents = await parse(
-        convertToMarkdown(workbook, {
-          useHeadlinesUntilLevel: 2,
-          useListsUntilLevel: Infinity,
-        }),
-      );
+      this.mindMap = await readMindMap(data);
+      this.renderContents();
     });
     this.#listeners.push(remove);
 
@@ -55,6 +61,30 @@ export class Root extends LitElement {
     this.hasDocument = false;
     await this.#setNoDocumentView('');
     this.#listeners.forEach(remove => remove());
+  }
+
+  @eventOptions({ passive: true })
+  setHeadlineLevel({ detail: value }: CustomEvent<number>) {
+    const useHeadlinesUntilLevel = (value as 0) ?? 2;
+    this.conversionOptions = {
+      ...this.conversionOptions,
+      useHeadlinesUntilLevel,
+      useOrderedListsUntilLevel: Math.max(useHeadlinesUntilLevel, this.conversionOptions.useOrderedListsUntilLevel),
+      useUnorderedListsUntilLevel: Math.max(useHeadlinesUntilLevel, this.conversionOptions.useUnorderedListsUntilLevel),
+    };
+    this.renderContents();
+  }
+
+  @eventOptions({ passive: true })
+  setOrderedListLevel({ detail: value }: CustomEvent<number>) {
+    this.conversionOptions = { ...this.conversionOptions, useOrderedListsUntilLevel: value ?? 4 };
+    this.renderContents();
+  }
+
+  @eventOptions({ passive: true })
+  setUnorderedListLevel({ detail: value }: CustomEvent<number>) {
+    this.conversionOptions = { ...this.conversionOptions, useUnorderedListsUntilLevel: value ?? Infinity };
+    this.renderContents();
   }
 
   // view: select file (filePath === undefined)
@@ -85,6 +115,11 @@ export class Root extends LitElement {
     this.#listeners.forEach(remove => remove());
   }
 
+  async renderContents() {
+    if (this.mindMap === undefined) return;
+    this.contents = await parse(convertToMarkdown(this.mindMap, this.conversionOptions));
+  }
+
   override render() {
     return html`
       <main>
@@ -96,7 +131,32 @@ export class Root extends LitElement {
           `,
           () => html`
             <xlp-preview>${unsafeHTML(this.contents)}</xlp-preview>
-            <xlp-tool-bar role="navigation" hide-after="2000" @close="${this.closeFile}"></xlp-tool-bar>
+            <xlp-tool-bar role="navigation" hide-after="2000">
+              <xlp-numeric-stepper
+                @change="${this.setHeadlineLevel}"
+                min="0"
+                max="6"
+                value="${this.conversionOptions.useHeadlinesUntilLevel}"
+              >
+                <xlp-icon>title</xlp-icon>
+              </xlp-numeric-stepper>
+
+              <xlp-numeric-stepper
+                @change="${this.setOrderedListLevel}"
+                min="${this.conversionOptions.useHeadlinesUntilLevel}"
+                value="${this.conversionOptions.useOrderedListsUntilLevel}"
+              >
+                <xlp-icon>format_list_numbered</xlp-icon>
+              </xlp-numeric-stepper>
+
+              <xlp-numeric-stepper
+                @change="${this.setUnorderedListLevel}"
+                min="${this.conversionOptions.useHeadlinesUntilLevel}"
+                value="${this.conversionOptions.useUnorderedListsUntilLevel}"
+              >
+                <xlp-icon>format_list_bulleted</xlp-icon>
+              </xlp-numeric-stepper>
+            </xlp-tool-bar>
           `,
         )}
       </main>
