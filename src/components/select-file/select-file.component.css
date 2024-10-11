@@ -10,8 +10,21 @@
   user-select: none;
 }
 
+:host([background]) {
+  background-color: color-mix(in srgb, #f4f4f4, transparent 15%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+:host([background][dragged-over]) {
+  opacity: 1;
+}
+
 slot {
+  position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
 
   flex-flow: row nowrap;
@@ -26,8 +39,15 @@ slot {
   --xlp-icon-size: 100px;
   font-variation-settings: 'wght' 150;
 
-  :host([dragged-over]) & {
+  :host(:not([background])[dragged-over]) & {
     border-color: #f4f4f4;
     color: #f4f4f4;
+  }
+
+  :host([background]) & {
+    position: absolute;
+    inset: 10px;
+    color: #333;
+    border-color: #000;
   }
 }

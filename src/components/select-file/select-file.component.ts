@@ -11,6 +11,9 @@ export class SelectFile extends LitElement {
 
   #listeners: (() => void)[] = [];
 
+  @property({ type: Boolean, reflect: true })
+  background = false;
+
   @property({ type: Boolean, reflect: true, attribute: 'dragged-over' })
   draggedOver = false;
 
