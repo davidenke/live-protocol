@@ -25,7 +25,7 @@ xlp-preview {
     > ol,
     > blockquote,
     > pre {
-      margin: 0 0 calc(12 * var(---xlp-rel-pt));
+      margin: 0 0 calc(5 * var(---xlp-rel-mm));
     }
 
     h1 {
@@ -48,7 +48,48 @@ xlp-preview {
 
     ul,
     ol {
-      padding-inline-start: calc(12 * var(---xlp-rel-pt));
+      padding: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 1.5ch;
+      list-style: none;
+
+      &::before {
+        position: absolute;
+        inset: 0 auto auto 0;
+      }
+    }
+
+    ul > li::before {
+      content: '•';
+    }
+
+    ol {
+      counter-reset: item;
+
+      > li::before {
+        content: counters(item, '.') '.';
+        counter-increment: item;
+      }
+    }
+
+    /* prettier-ignore */
+    ol {
+      > li { padding-left: 2.5ch; }
+      > li > ol > li { padding-left: 4ch; }
+      > li > ol > li > ol > li { padding-left: 5.5ch; }
+      > li > ol > li > ol > li > ol > li { padding-left: 7ch; }
+      > li > ol > li > ol > li > ol > li > ol > li { padding-left: 8.5ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 10ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 11.5ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 13ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 14.5ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 16ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 17.5ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 19ch; }
+      > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li > ol > li { padding-left: 21.5ch; }
     }
   }
 }
