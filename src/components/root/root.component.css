@@ -17,11 +17,6 @@
   font-style: normal;
 }
 
-:host(:not([has-document])) {
-  cursor: default;
-  user-select: none;
-}
-
 main {
   display: flex;
   flex-flow: row nowrap;
@@ -31,16 +26,28 @@ main {
   justify-content: center;
 }
 
-xlp-title-bar {
+:host(:not([has-document])) {
+  cursor: default;
+  user-select: none;
+}
+
+:host(:not([has-document])) xlp-title-bar {
   z-index: 1;
 }
 
-xlp-tool-bar {
+:host([has-document]) xlp-tool-bar {
   position: fixed;
   inset: 10px 10px auto auto;
+  z-index: 1;
 }
 
-xlp-preview {
+:host([has-document]) xlp-select-file {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+}
+
+:host([has-document]) xlp-preview {
   flex: 1;
   min-height: 100svh;
   min-width: 0;

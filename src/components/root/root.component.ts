@@ -151,6 +151,7 @@ export class Root extends LitElement {
           `,
           () => html`
             <xlp-preview>${unsafeHTML(this.contents)}</xlp-preview>
+            <xlp-select-file background @path="${this.loadFile}"><xlp-icon>upload_file</xlp-icon></xlp-select-file>
             <xlp-tool-bar role="navigation" hide-after="2000">
               <xlp-numeric-stepper
                 @change="${this.setVisibilityLevel}"
