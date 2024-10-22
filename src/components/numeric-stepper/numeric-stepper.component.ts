@@ -1,3 +1,5 @@
+import '../badge/badge.component.js';
+
 import { html, LitElement, unsafeCSS } from 'lit';
 import { customElement, eventOptions, property } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
@@ -52,13 +54,13 @@ export class NumericStepper extends LitElement {
 
   override render() {
     return html`
-      <label>
+      <xlp-badge circular>
         ${when(
           !Number.isFinite(this.value),
           () => html`<xlp-icon>all_inclusive</xlp-icon>`,
-          () => html`<span>${this.value}</span>`,
+          () => this.value,
         )}
-      </label>
+      </xlp-badge>
       <xlp-icon-button ?disabled="${this.disabled}" @click="${this.increase}">
         <xlp-icon>keyboard_arrow_up</xlp-icon>
       </xlp-icon-button>
