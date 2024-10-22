@@ -130,16 +130,21 @@ pnpm build
 
 ## Icons
 
+Most of the app icons are generated after installation using [the `tauri icon` command](https://v1.tauri.app/v1/guides/features/icons/) (s. `prepare` script in [`package.json`](./package.json)).
+
 ### App icon
 
-Most of the app icons are generated after installation.
+The only exception is the macOS icon, which is configured to be used from the [`./src/assets/icons/app.icon.icns` path](./src/assets/icons/app.icon.icns) directly. \
+This icon is sourced from its Adobe Illustrator file [`./src/assets/icons/app.icns.ai`](./src/assets/icons/app.icns.ai):
 
-The only exception is the macOS icon, which is configured to be used from the [`./src/assets/icons/app.icon.icns` path](./src/assets/icons/app.icon.icns) directly.
+- Once opened and edited, the icon has to be exported in [eight different sizes as PNGs](https://gist.github.com/jamieweavis/b4c394607641e1280d447deed5fc85fc) and converted properly.
+- To create the files, use the Illustrator export dialog (`File → Export → Export for Screens...`).\
+  A preset can be imported from the [`./src/assets/icons/app.icns.preset`](./src/assets/icons/app.icns.preset) file.
+- Output the files to the [`./src/assets/icons/icon.iconset`](./src/assets/icons/icon.iconset) folder.
+- Then, this _folder is converted_ to an ICNS file _(Yes, you that's right!)_ using the `iconutil` command _on macOS_:\
+  `iconutil --convert icns --output src/assets/icons/app.icon.icns src/assets/icons/icon.iconset`.
 
-This icon is sourced from its Adobe Illustrator file [`./src/assets/icons/app.icns.ai`](./src/assets/icons/app.icns.ai). Once opened and edited, the icons has to be exported in [eight different sizes as PNGs and converted properly](https://gist.github.com/jamieweavis/b4c394607641e1280d447deed5fc85fc).\
-To export the files properly, use the Illustrator export dialog (`File → Export → Export for Screens...`). A preset can be imported from the [`./src/assets/icons/app.icns.preset`](./src/assets/icons/app.icns.preset) file.\
-Output the files to the to be created [`./src/assets/icons/icon.iconset`](./src/assets/icons/icon.iconset) folder.\
-Then, this folder is converted to an ICNS file using the `iconutil` command on macOS: `iconutil --convert icns --output src/assets/icons/app.icon.icns src/assets/icons/icon.iconset`.
+> As this should not happen very often, this process is not automated but documented here, just as a brief reminder.
 
 [Rust]: https://www.rust-lang.org/
 [pnpm]: https://pnpm.io/
