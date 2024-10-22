@@ -141,8 +141,6 @@ To export the files properly, use the Illustrator export dialog (`File → Expor
 Output the files to the to be created [`./src/assets/icons/icon.iconset`](./src/assets/icons/icon.iconset) folder.\
 Then, this folder is converted to an ICNS file using the `iconutil` command on macOS: `iconutil --convert icns --output src/assets/icons/app.icon.icns src/assets/icons/icon.iconset`.
 
-```bash
-
 [Rust]: https://www.rust-lang.org/
 [pnpm]: https://pnpm.io/
 [Tauri]: https://tauri.app/
@@ -150,4 +148,3 @@ Then, this folder is converted to an ICNS file using the `iconutil` command on m
 [Node.js]: https://nodejs.org/
 [nvm-nix]: https://github.com/nvm-sh/nvm
 [nvm-win]: https://github.com/coreybutler/nvm-windows
-```
