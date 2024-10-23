@@ -10,7 +10,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 //
 // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
 // https://tauri.app/start/frontend/vite/#update-vite-configuration
-export default defineConfig(async () => ({
+export default defineConfig(async config => ({
   // prevent vite from obscuring rust errors
   clearScreen: false,
   server: {
@@ -43,23 +43,38 @@ export default defineConfig(async () => ({
   // add vendor prefixes to CSS automatically as needed
   css: { postcss: { plugins: [autoprefixer] } },
 
+  // we need some mocks for detached mode
+  publicDir: config.mode === 'detached' ? 'mocks' : 'public',
+
   plugins: [
     // add type check directly to vite
     checker({ typescript: true, overlay: false }),
-    // that nasty docx converter uses node stuff
+    // (1) that nasty docx converter uses node stuff, so we need to polyfill it;
+    // but some need manual mocking so they're excluded and aliased below
     nodePolyfills({ exclude: ['buffer', 'fs', 'http2', 'module', 'url', 'zlib'] }),
   ],
   define: {
-    process: { env: {}, version: '0.0.0' },
-    import: { meta: { url: '' } },
+    process: { env: {}, version: '0.0.0', mode: config.mode === 'detached' },
+    import: { meta: { url: 'http://localhost' } },
   },
   resolve: {
     alias: {
+      // node
       buffer: resolve(import.meta.dirname, 'src/mocks/node/buffer.ts'),
       http2: resolve(import.meta.dirname, 'src/mocks/node/http2.ts'),
       module: resolve(import.meta.dirname, 'src/mocks/node/module.ts'),
       url: resolve(import.meta.dirname, 'src/mocks/node/url.ts'),
       zlib: resolve(import.meta.dirname, 'src/mocks/node/zlib.ts'),
+
+      // tauri
+      ...(config.mode === 'detached'
+        ? {
+            '@tauri-apps/api/window': resolve(import.meta.dirname, 'src/mocks/tauri/api.window.ts'),
+            '@tauri-apps/api/event': resolve(import.meta.dirname, 'src/mocks/tauri/api.event.ts'),
+            '@tauri-apps/plugin-dialog': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-dialog.ts'),
+            '@tauri-apps/plugin-fs': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-fs.ts'),
+          }
+        : {}),
     },
   },
 }));

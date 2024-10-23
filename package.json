@@ -9,6 +9,7 @@
     "lint": "eslint -c eslint.config.js src/**/*.ts",
     "test": "vitest",
     "dev": "tauri dev",
+    "dev:detached": "vite dev --mode detached",
     "build": "tauri build"
   },
   "author": {
