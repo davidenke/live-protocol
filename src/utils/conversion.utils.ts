@@ -1,3 +1,4 @@
+import { md2docx } from '@adobe/helix-md2docx';
 import { parse } from 'marked';
 import type { Sheet, Topic, Workbook } from 'xmind-model';
 
@@ -62,6 +63,14 @@ export function convertToMarkdown(mindMap: MindMap, options?: ConversionOptions)
  */
 export async function convertToHtml(markdown: string): Promise<string> {
   return parse(markdown);
+}
+
+/**
+ * Convert markdown to docx
+ */
+export async function convertToDocx(markdown: string): Promise<string> {
+  const buffer = await md2docx(markdown);
+  return new TextDecoder().decode(buffer);
 }
 
 /**

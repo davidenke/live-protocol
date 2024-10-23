@@ -1,6 +1,9 @@
+import { resolve } from 'node:path';
+
 import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // Vite configuration
 // https://vitejs.dev/config/
@@ -43,5 +46,20 @@ export default defineConfig(async () => ({
   plugins: [
     // add type check directly to vite
     checker({ typescript: true, overlay: false }),
+    // that nasty docx converter uses node stuff
+    nodePolyfills({ exclude: ['buffer', 'fs', 'http2', 'module', 'url', 'zlib'] }),
   ],
+  define: {
+    process: { env: {}, version: '0.0.0' },
+    import: { meta: { url: '' } },
+  },
+  resolve: {
+    alias: {
+      buffer: resolve(import.meta.dirname, 'src/mocks/node/buffer.ts'),
+      http2: resolve(import.meta.dirname, 'src/mocks/node/http2.ts'),
+      module: resolve(import.meta.dirname, 'src/mocks/node/module.ts'),
+      url: resolve(import.meta.dirname, 'src/mocks/node/url.ts'),
+      zlib: resolve(import.meta.dirname, 'src/mocks/node/zlib.ts'),
+    },
+  },
 }));
