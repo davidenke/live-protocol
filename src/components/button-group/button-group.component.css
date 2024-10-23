@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-wrap: nowrap;
+
+  gap: 2px;
+  padding: 2px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+:host([orientation='vertical']) {
+  flex-direction: column;
+}
+
+:host([orientation='horizontal']) {
+  flex-direction: row;
+}
