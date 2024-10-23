@@ -1,4 +1,4 @@
-import { readFile, type WatchEvent, watchImmediate } from '@tauri-apps/plugin-fs';
+import { readFile, type WatchEvent, watchImmediate, writeFile } from '@tauri-apps/plugin-fs';
 
 export function isWatchedFileDataModified(event: WatchEvent): boolean {
   return (
@@ -43,4 +43,20 @@ export function getFileName(path: string, suffix?: string): FileName {
 
   return { name, base, extension };
 }
+
+export async function exportFile(path: string, data: string | Uint8Array): Promise<void> {
+  // convert string contents to Uint8Array if necessary
+  if (typeof data === 'string') {
+    data = new TextEncoder().encode(data);
+  }
+  // write to file
+  return writeFile(path, data);
+
+  // Maybe, some day, we'll do a browser version of this function.
+  // const blob = new Blob([data], { type });
+  // const url = URL.createObjectURL(blob);
+  // const link = document.createElement('a');
+  // link.href = url;
+  // link.download = name;
+  // link.click();
 }

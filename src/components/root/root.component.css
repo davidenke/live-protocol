@@ -39,6 +39,10 @@ main {
   position: fixed;
   inset: 10px 10px auto auto;
   z-index: 1;
+
+  xlp-button-group {
+    justify-content: flex-start;
+  }
 }
 
 :host([has-document]) xlp-select-file {
@@ -51,6 +55,12 @@ main {
   flex: 1;
   min-height: 100svh;
   min-width: 0;
+}
+
+:host([has-document]) xlp-icon-button > xlp-icon {
+  --xlp-icon-size: 22px;
+  --xlp-icon-spacing: 3px;
+  font-variation-settings: 'wght' 300;
 }
 
 @media print {

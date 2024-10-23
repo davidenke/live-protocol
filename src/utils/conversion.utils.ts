@@ -1,3 +1,4 @@
+import { parse } from 'marked';
 import type { Sheet, Topic, Workbook } from 'xmind-model';
 
 /**
@@ -54,6 +55,13 @@ export function convertToMarkdown(mindMap: MindMap, options?: ConversionOptions)
     .getSheets()
     .map(sheet => convertSheetToMarkdown(sheet, options))
     .join('\n\n');
+}
+
+/**
+ * Convert markdown to html
+ */
+export async function convertToHtml(markdown: string): Promise<string> {
+  return parse(markdown);
 }
 
 /**

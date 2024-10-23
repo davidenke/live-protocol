@@ -14,6 +14,7 @@
     "fs:default",
     "fs:allow-watch",
     "fs:allow-unwatch",
+    "fs:allow-write-file",
     "shell:allow-open",
     "dialog:default"
   ]

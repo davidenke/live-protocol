@@ -1,4 +1,6 @@
+import '../button-group/button-group.component.js';
 import '../icon/icon.component.js';
+import '../icon-button/icon-button.component.js';
 import '../numeric-stepper/numeric-stepper.component.js';
 import '../preview/preview.component.js';
 import '../select-file/select-file.component.js';
@@ -6,15 +8,22 @@ import '../title-bar/title-bar.component.js';
 import '../tool-bar/tool-bar.component.js';
 
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
+import { save } from '@tauri-apps/plugin-dialog';
 import { html, LitElement, unsafeCSS } from 'lit';
 import { customElement, eventOptions, property, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
-import { parse } from 'marked';
 
-import { type ConversionOptions, convertToMarkdown, type MindMap } from '../../utils/conversion.utils.js';
-import { getFileName, readAndWatchFile } from '../../utils/file.utils.js';
+import {
+  type ConversionOptions,
+  convertToDocx,
+  convertToHtml,
+  convertToMarkdown,
+  type MindMap,
+} from '../../utils/conversion.utils.js';
+import { exportFile, getFileName, readAndWatchFile } from '../../utils/file.utils.js';
 import { readMindMap } from '../../utils/xmind.utils.js';
+
 import styles from './root.component.css?inline';
 
 @customElement('xlp-root')
@@ -36,7 +45,7 @@ export class Root extends LitElement {
   private mindMap?: MindMap;
 
   @state()
-  private contents?: string;
+  private contents?: { path: string; md: string; html: string };
 
   /**
    * @internal
@@ -48,7 +57,7 @@ export class Root extends LitElement {
   async loadFile({ detail: path }: CustomEvent<string>) {
     const remove = await readAndWatchFile(path, async data => {
       this.mindMap = await readMindMap(data);
-      this.renderContents();
+      this.#renderContents(path);
     });
     this.#listeners.push(remove);
 
@@ -74,7 +83,9 @@ export class Root extends LitElement {
       useOrderedListsUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useOrderedListsUntilLevel),
       useUnorderedListsUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useUnorderedListsUntilLevel),
     };
-    this.renderContents();
+
+    if (this.contents === undefined) return;
+    this.#renderContents(this.contents.path);
   }
 
   @eventOptions({ passive: true })
@@ -86,7 +97,9 @@ export class Root extends LitElement {
       useOrderedListsUntilLevel: Math.max(useHeadlinesUntilLevel, this.conversionOptions.useOrderedListsUntilLevel),
       useUnorderedListsUntilLevel: Math.max(useHeadlinesUntilLevel, this.conversionOptions.useUnorderedListsUntilLevel),
     };
-    this.renderContents();
+
+    if (this.contents === undefined) return;
+    this.#renderContents(this.contents.path);
   }
 
   @eventOptions({ passive: true })
@@ -95,7 +108,9 @@ export class Root extends LitElement {
       ...this.conversionOptions,
       useOrderedListsUntilLevel: Math.min(this.conversionOptions.useUntilLevel, value ?? 4),
     };
-    this.renderContents();
+
+    if (this.contents === undefined) return;
+    this.#renderContents(this.contents.path);
   }
 
   @eventOptions({ passive: true })
@@ -104,7 +119,46 @@ export class Root extends LitElement {
       ...this.conversionOptions,
       useUnorderedListsUntilLevel: Math.min(this.conversionOptions.useUntilLevel, value ?? Infinity),
     };
-    this.renderContents();
+
+    if (this.contents === undefined) return;
+    this.#renderContents(this.contents.path);
+  }
+
+  @eventOptions({ passive: true })
+  async exportFile(event: Event) {
+    // we need contents in any case
+    if (this.contents === undefined) return;
+
+    // read the format from the event target and handle it, albeit markdown and
+    // html are already available and don't have to be explicitly converted
+    const { dataset } = event.currentTarget as HTMLElement;
+    const { base: fileBaseName } = getFileName(this.contents.path);
+
+    switch (dataset.format) {
+      case 'md': {
+        const defaultPath = `${fileBaseName}.md`;
+        const filters = [{ name: 'Markdown', extensions: ['md', 'mdx', 'markdown'] }];
+        const path = await save({ defaultPath, filters });
+        if (path !== null) await exportFile(path, this.contents.md);
+        break;
+      }
+      case 'html': {
+        const defaultPath = `${fileBaseName}.html`;
+        const filters = [{ name: 'HTML', extensions: ['html', 'htm'] }];
+        const path = await save({ defaultPath, filters });
+        if (path !== null) await exportFile(path, this.contents.html);
+        break;
+      }
+      case 'docx': {
+        const defaultPath = `${fileBaseName}.docx`;
+        const filters = [{ name: 'Document', extensions: ['docx', 'doc'] }];
+        const path = await save({ defaultPath, filters });
+        // const content = await convertToDocx(this.contents.md);
+        const content = await convertToDocx(`file://${this.contents.path}`);
+        if (path !== null) await exportFile(path, content);
+        break;
+      }
+    }
   }
 
   // view: select file (filePath === undefined)
@@ -135,9 +189,11 @@ export class Root extends LitElement {
     this.#listeners.forEach(remove => remove());
   }
 
-  async renderContents() {
+  async #renderContents(path: string) {
     if (this.mindMap === undefined) return;
-    this.contents = await parse(convertToMarkdown(this.mindMap, this.conversionOptions));
+    const md = convertToMarkdown(this.mindMap, this.conversionOptions);
+    const html = await convertToHtml(md);
+    this.contents = { path, md, html };
   }
 
   override render() {
@@ -150,7 +206,7 @@ export class Root extends LitElement {
             <xlp-select-file @path="${this.loadFile}"><xlp-icon>upload_file</xlp-icon></xlp-select-file>
           `,
           () => html`
-            <xlp-preview>${unsafeHTML(this.contents)}</xlp-preview>
+            <xlp-preview>${unsafeHTML(this.contents?.html)}</xlp-preview>
             <xlp-select-file background @path="${this.loadFile}"><xlp-icon>upload_file</xlp-icon></xlp-select-file>
             <xlp-tool-bar role="navigation" hide-after="2000">
               <xlp-numeric-stepper
@@ -187,6 +243,35 @@ export class Root extends LitElement {
               >
                 <xlp-icon>format_list_bulleted</xlp-icon>
               </xlp-numeric-stepper>
+
+              <xlp-button-group orientation="vertical">
+                <xlp-icon-button
+                  badge="md"
+                  data-format="md"
+                  ?disabled="${this.contents === undefined}"
+                  @click="${this.exportFile}"
+                >
+                  <xlp-icon>file_export</xlp-icon>
+                </xlp-icon-button>
+
+                <xlp-icon-button
+                  badge="html"
+                  data-format="html"
+                  ?disabled="${this.contents === undefined}"
+                  @click="${this.exportFile}"
+                >
+                  <xlp-icon>file_export</xlp-icon>
+                </xlp-icon-button>
+
+                <xlp-icon-button
+                  badge="docx"
+                  data-format="docx"
+                  ?disabled="${this.contents === undefined}"
+                  @click="${this.exportFile}"
+                >
+                  <xlp-icon>file_export</xlp-icon>
+                </xlp-icon-button>
+              </xlp-button-group>
             </xlp-tool-bar>
           `,
         )}

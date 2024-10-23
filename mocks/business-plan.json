@@ -1,0 +1,853 @@
+[
+  {
+    "id": "b7189136-9613-4990-8ae5-0913342ca70f",
+    "revisionId": "0dfa3d74-5f9e-4a89-9721-a16385165391",
+    "class": "sheet",
+    "rootTopic": {
+      "id": "0roa6u7p9p7s8lu4o9pg909juo",
+      "class": "topic",
+      "title": "Business Plan",
+      "structureClass": "org.xmind.ui.map.unbalanced",
+      "extensions": [
+        {
+          "provider": "org.xmind.ui.map.unbalanced",
+          "content": [
+            {
+              "name": "right-number",
+              "content": "4"
+            }
+          ]
+        }
+      ],
+      "children": {
+        "attached": [
+          {
+            "id": "5fsok5pcisab2f05b402g7e0d5",
+            "title": "Executive Summary",
+            "image": {
+              "src": "xap:resources/c0b41bc07fb45231c9e768ade569033b97ffb506a16ddb0cd243cfb98510fa29.svg",
+              "align": "left"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "6q7lrho5g7v9hvjvqgq6mguvug",
+                  "title": "Overview"
+                },
+                {
+                  "id": "2lch233g1ha8ead71h3h68apb3",
+                  "title": "Last"
+                },
+                {
+                  "id": "2klnnnkgk1c5sgkqa223d8eu2m",
+                  "title": "Continuously"
+                },
+                {
+                  "id": "228l7d0ldumb1keek4c1n1cotf",
+                  "title": "Venture Capitalists"
+                }
+              ]
+            }
+          },
+          {
+            "id": "7do50hg67m8demav8cld4ok4jg",
+            "title": "Company",
+            "image": {
+              "src": "xap:resources/12567a48de67cde1e62e7211f9746766beb923aa39cb6d0db3a4df71e55d75e5.svg",
+              "align": "left"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "2mduvthln642n4r105c5pp5cid",
+                  "title": "Employee",
+                  "markers": [
+                    {
+                      "markerId": "people-blue"
+                    }
+                  ]
+                },
+                {
+                  "id": "306rl2sshee6gt3ff5hqrc1i90",
+                  "title": "Office",
+                  "markers": [
+                    {
+                      "markerId": "flag-blue"
+                    }
+                  ]
+                },
+                {
+                  "id": "2jdj0e6ob9bcbc9teu8m9tjpii",
+                  "title": "Unique",
+                  "markers": [
+                    {
+                      "markerId": "symbol-question"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "7pni15le89fn603ifihj7r4tcu",
+            "title": "Financial",
+            "image": {
+              "src": "xap:resources/8098929fe12c30c9360549d0548789ee5c7c3aff722b45030132d23010c164e8.svg",
+              "align": "left"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "33mh7a76hhbttr4lu791qkurfi",
+                  "title": "Cash Flow"
+                },
+                {
+                  "id": "1cpcd58e5fk8bec3r2sg8mups0",
+                  "title": "Profit & Loss"
+                },
+                {
+                  "id": "15qt2ghb3rj67fb1hd4tebt67b",
+                  "title": "Break Even"
+                },
+                {
+                  "id": "48qgosmhurrtc5bus1s5de1gua",
+                  "title": "Capital Needed"
+                },
+                {
+                  "id": "0lep5e60b7eirglhpcafusrhh0",
+                  "title": "Predictions"
+                }
+              ]
+            }
+          },
+          {
+            "id": "34q6ht077k0pbcc7cgphmv5ufm",
+            "title": "Product",
+            "image": {
+              "src": "xap:resources/61fb56135e32f455ea91c83a22a9020efb070caef6d72ac44bde753b2ad572bc.svg",
+              "align": "left"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "10ako7j9l0glkn114lrgj721fb",
+                  "title": "Benefits",
+                  "markers": [
+                    {
+                      "markerId": "smiley-smile"
+                    }
+                  ]
+                },
+                {
+                  "id": "5hf9i8kfoq76acfb42b4mm89hr",
+                  "title": "When used?",
+                  "markers": [
+                    {
+                      "markerId": "symbol-question"
+                    }
+                  ]
+                },
+                {
+                  "id": "726q0cog8t0064qdauhirq6t21",
+                  "title": "How used?",
+                  "markers": [
+                    {
+                      "markerId": "symbol-question"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "7ir1fmte44n7v8u8192ucp10hs",
+            "title": "Management Team",
+            "image": {
+              "src": "xap:resources/476814b1b5b96d5095c96cea97cf1d042372bb6c4fd6cfe9d426e64898fcf7cf.svg",
+              "align": "right"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "061j3pfhh3gnfpu2f0g7g17ebj",
+                  "title": "Track record",
+                  "style": {
+                    "id": "bd238099-1ee8-4cf1-a25d-a7c0029ce17c",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                },
+                {
+                  "id": "706jtvl0tm7vmbpri21g2bjfpe",
+                  "title": "Experience",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "55tt91o89krenp0c5s8h4v2h4c",
+                        "title": "Others",
+                        "style": {
+                          "id": "a5802c50-0697-4764-b6c6-de1c775e1609",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "4qtaqmh7khvbnh70kemhuqqk46",
+                        "title": "Partners",
+                        "style": {
+                          "id": "9bb3546d-ce00-496c-bf03-52ade4d7df85",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "1so1jf94okmdovt5mppv4eiqqe",
+                        "title": "Yours",
+                        "style": {
+                          "id": "98521f98-8fd9-401b-a6dc-012cd489c591",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "aa41da88-54a6-4afd-8dd6-88d0ea09253a",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                },
+                {
+                  "id": "30rhm3v11rm4pop1rsskg40lu7",
+                  "title": "Skills",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "4r1vaqkuanafro6b6ka41assri",
+                        "title": "Partners",
+                        "style": {
+                          "id": "2843baae-d2d7-4ae4-a9f6-cff404b127bc",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "73ejegjjdardlnbdpk5pf821ds",
+                        "title": "Others",
+                        "style": {
+                          "id": "cdcf5987-f2d7-4a02-aa8e-b7787133579f",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "3lhl3k8h91klv462perv9a1107",
+                        "title": "Yours",
+                        "style": {
+                          "id": "9ff8fe5c-9630-43e8-969c-06172e2c502d",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "5fd60af4-e3a6-446c-8d6c-97262d3c9b39",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                },
+                {
+                  "id": "7pmpalqp7lc8ne564ueodq7b70",
+                  "title": "Partners",
+                  "style": {
+                    "id": "163c3d5b-ef7b-4f6a-b994-e37f40fc844f",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                }
+              ]
+            },
+            "style": {
+              "id": "262df91e-2aa1-4890-a29e-0e9af9260deb",
+              "properties": {
+                "fo:text-align": "right"
+              }
+            }
+          },
+          {
+            "id": "74bujg7v6m4ijm3h4g8j46icha",
+            "title": "Strategy",
+            "image": {
+              "src": "xap:resources/5f878f1e47922e9451f981e22f7fb3a820b4de8e181bd1f3cd78d2be7475a614.svg",
+              "align": "right"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "741c4dbe8sp9d8ff1r7qilf50b",
+                  "title": "Achievements",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "7e1oi4djn7ti86g89ck7k2a7k2",
+                        "title": "When",
+                        "style": {
+                          "id": "3538ecff-dd38-4d55-9203-d02e11a8ec2b",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "6ktnb1ca14g4pm761h0vg945tt",
+                        "title": "What",
+                        "style": {
+                          "id": "3d760d55-2cb0-4bb0-a925-1b57337b54b6",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "e14eb927-62b0-4018-a15b-3d6b51de48b4",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                },
+                {
+                  "id": "5cat2vv7diciefmq5ssa3r12bc",
+                  "title": "Plans",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "7o858uu32b1v029efm68i20teg",
+                        "title": "Short Team",
+                        "style": {
+                          "id": "f83734f5-1751-46ae-afea-40cc2b3f3231",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "5v83gihc2rafo0c77pe6vf69ni",
+                        "title": "Long Team",
+                        "style": {
+                          "id": "22a8f6b3-c18b-4141-acb1-37e37f11afcb",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "e4c48610-402d-4112-a1fb-f1e81e99f285",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                }
+              ]
+            },
+            "style": {
+              "id": "f4653fbe-025a-4951-9aec-aec391bdaa6f",
+              "properties": {
+                "fo:text-align": "right"
+              }
+            }
+          },
+          {
+            "id": "2tfd7vcbfhcpro2sd3futfca1n",
+            "title": "Target Market",
+            "image": {
+              "src": "xap:resources/d8988e6a1669ff76136d5516bdf1411579621c6f932d3fe5b9e7f9b3097f25aa.svg",
+              "align": "right"
+            },
+            "children": {
+              "attached": [
+                {
+                  "id": "0c3e25psvasrtma702gqa7jebt",
+                  "title": "Customers",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "6cv67thtfb7nb0e95rv145c0h6",
+                        "title": "Who",
+                        "style": {
+                          "id": "f2ded06d-3387-4c36-aa9c-ecb2f72bb747",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "6l32ctnp5590ml3h1b7issr8b0",
+                        "title": "Ages",
+                        "style": {
+                          "id": "42b4664d-0a5d-4f67-9e0c-73f152ae84c7",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "28epblon3mjdamvrtlc9usm2e7",
+                        "title": "Gender",
+                        "markers": [
+                          {
+                            "markerId": "people-blue"
+                          }
+                        ],
+                        "style": {
+                          "id": "d84c5e64-8f5f-4d3b-8908-aa1f0679f85c",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "0g2kob6dpfa7ui08c88jfr7umn",
+                        "title": "Income",
+                        "markers": [
+                          {
+                            "markerId": "c_symbol_money"
+                          }
+                        ],
+                        "style": {
+                          "id": "d83289ac-6770-4025-a684-90ff293914b2",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "fadc52a6-2db5-45c0-b7d8-c0e0f2960f60",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                },
+                {
+                  "id": "41shhugmi5amhvaindmluogvgk",
+                  "title": "Competitors",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "1jp3nq6n3dn1hkhc8242537948",
+                        "title": "Who",
+                        "markers": [
+                          {
+                            "markerId": "people-purple"
+                          }
+                        ],
+                        "style": {
+                          "id": "a260b84a-d4cf-47d2-a4a2-39aaba49ae40",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "1tshk1jvfpt7uutjq0k5ue9o8s",
+                        "title": "Why different",
+                        "markers": [
+                          {
+                            "markerId": "symbol-question"
+                          }
+                        ],
+                        "style": {
+                          "id": "5445e75f-9a7f-4e7b-a456-054b2ab976c3",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "343353e7-8473-41f5-ace6-0123259a5cdf",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                },
+                {
+                  "id": "43eds86romad6jpn47t5593hvm",
+                  "title": "USP",
+                  "children": {
+                    "attached": [
+                      {
+                        "id": "0r6861k7i50sctchhlv1uouf94",
+                        "title": "Unique",
+                        "style": {
+                          "id": "5975193a-5dc6-4444-9e17-0dfa2195da4e",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "2fn7no9maee5aqqqapm14leqa0",
+                        "title": "Selling",
+                        "style": {
+                          "id": "506306f4-cc0f-4dac-88b3-b5d8dedeff2f",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      },
+                      {
+                        "id": "1h9g5e7chu7gqplv4a5s9a0s4n",
+                        "title": "Proposition",
+                        "style": {
+                          "id": "b22b4641-882a-4b06-9aac-75a569bfa21a",
+                          "properties": {
+                            "fo:text-align": "right"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "style": {
+                    "id": "fd60ef79-bdb3-423a-bafb-f827cea30105",
+                    "properties": {
+                      "fo:text-align": "right"
+                    }
+                  }
+                }
+              ]
+            },
+            "boundaries": [
+              {
+                "id": "2i99qhbutesmfrslb3kdvmvpji",
+                "range": "(0,0)",
+                "style": {
+                  "id": "a094900c-11b1-4e92-8326-9100d156713a",
+                  "properties": {
+                    "svg:fill": "#25548AFF",
+                    "line-color": "#25548AFF",
+                    "shape-class": "org.xmind.boundaryShape.roundedRect"
+                  }
+                }
+              }
+            ],
+            "style": {
+              "id": "625991ea-cccc-432f-990a-5aa72864820a",
+              "properties": {
+                "fo:text-align": "right"
+              }
+            }
+          }
+        ]
+      },
+      "style": {
+        "id": "7a76fd41-9d43-43fe-a35e-3611d611c6b6",
+        "properties": {
+          "fo:font-size": "48pt",
+          "fo:font-weight": "700",
+          "fo:text-transform": "uppercase",
+          "fo:text-align": "left",
+          "svg:fill": "#191959FF",
+          "line-width": "3pt",
+          "line-color": "#191959FF",
+          "line-pattern": "solid",
+          "border-line-color": "#191959FF",
+          "border-line-width": "5pt",
+          "shape-class": "org.xmind.topicShape.roundedRect",
+          "line-class": "org.xmind.branchConnection.roundedfold",
+          "arrow-end-class": "org.xmind.arrowShape.none",
+          "alignment-by-level": "actived"
+        }
+      }
+    },
+    "relationships": [
+      {
+        "id": "6m7ls8kdpjbblqupaj7h07kr7a",
+        "end1Id": "5fsok5pcisab2f05b402g7e0d5",
+        "end2Id": "2klnnnkgk1c5sgkqa223d8eu2m",
+        "title": "Important",
+        "controlPoints": {
+          "0": {
+            "x": 149.6237117319921,
+            "y": -100.40625000000011
+          },
+          "1": {
+            "x": 75.23046874999989,
+            "y": -139.33987548162523
+          }
+        },
+        "lineEndPoints": {
+          "0": {
+            "x": 46.704413268007784,
+            "y": -40
+          },
+          "1": {
+            "x": 69.5,
+            "y": -1.5390307683748858
+          }
+        },
+        "style": {
+          "id": "37dca589-0f96-4d7c-8219-c5d35d2bb869",
+          "properties": {
+            "fo:font-weight": "bold",
+            "line-width": "2",
+            "line-pattern": "dot",
+            "arrow-end-class": "org.xmind.arrowShape.triangle"
+          }
+        }
+      }
+    ],
+    "title": "Business Plan",
+    "topicPositioning": "fixed",
+    "compactLayoutModeLevel": "Third",
+    "legend": {
+      "visibility": "hidden",
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "extensions": [
+      {
+        "provider": "org.xmind.ui.skeleton.structure.style",
+        "content": {
+          "centralTopic": "org.xmind.ui.map.clockwise",
+          "mainTopic": "org.xmind.ui.logic.right"
+        }
+      }
+    ],
+    "style": {
+      "id": "165827c5-aeee-4dad-9512-976cab4459f2",
+      "properties": {
+        "multi-line-colors": "none",
+        "line-tapered": "none"
+      }
+    },
+    "theme": {
+      "centralTopic": {
+        "id": "5d79830c-8e6f-430b-b3c9-38b58e0e8320",
+        "properties": {
+          "fo:font-family": "NeverMind",
+          "fo:font-size": "30pt",
+          "fo:font-weight": "500",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "center",
+          "svg:fill": "#191959",
+          "fill-pattern": "solid",
+          "line-width": "3pt",
+          "line-color": "#191959",
+          "line-pattern": "solid",
+          "border-line-color": "inherited",
+          "border-line-width": "0pt",
+          "shape-class": "org.xmind.topicShape.roundedRect",
+          "line-class": "org.xmind.branchConnection.curve",
+          "arrow-end-class": "org.xmind.arrowShape.none",
+          "alignment-by-level": "inactived"
+        }
+      },
+      "mainTopic": {
+        "id": "d9ea17ab-2739-4c76-8093-f848859a440f",
+        "properties": {
+          "fo:font-family": "NeverMind",
+          "fo:font-size": "18pt",
+          "fo:font-weight": "600",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "left",
+          "svg:fill": "#EACFB5FF",
+          "fill-pattern": "solid",
+          "line-width": "2pt",
+          "line-color": "inherited",
+          "border-line-color": "inherited",
+          "border-line-width": "0pt",
+          "shape-class": "org.xmind.topicShape.roundedRect",
+          "line-class": "org.xmind.branchConnection.roundedElbow"
+        }
+      },
+      "subTopic": {
+        "id": "0e82e1b1-c49e-4629-9fae-1acf5a5044fe",
+        "properties": {
+          "fo:font-family": "NeverMind",
+          "fo:font-size": "14pt",
+          "fo:font-weight": "500",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "left",
+          "svg:fill": "#F3EEEAFF",
+          "fill-pattern": "solid",
+          "line-width": "2pt",
+          "line-color": "inherited",
+          "border-line-color": "inherited",
+          "border-line-width": "0pt",
+          "shape-class": "org.xmind.topicShape.roundedRect",
+          "line-class": "org.xmind.branchConnection.roundedElbow"
+        }
+      },
+      "calloutTopic": {
+        "id": "42530c2c-e205-4b74-a415-32267107f202",
+        "properties": {
+          "fo:font-family": "NeverMind",
+          "fo:font-size": "14pt",
+          "fo:font-weight": "400",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "left",
+          "svg:fill": "#8CB5FF",
+          "fill-pattern": "solid",
+          "line-color": "inherited",
+          "border-line-color": "#8CB5FF",
+          "shape-class": "org.xmind.topicShape.roundedRect"
+        }
+      },
+      "summaryTopic": {
+        "id": "61f0b795-b05f-4a91-b6c2-38066d6090df",
+        "properties": {
+          "fo:font-family": "NeverMind",
+          "fo:font-size": "14pt",
+          "fo:font-weight": "400",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "left",
+          "svg:fill": "#8CB5FF",
+          "fill-pattern": "solid",
+          "line-color": "inherited",
+          "border-line-color": "#8CB5FF",
+          "shape-class": "org.xmind.topicShape.roundedRect",
+          "line-class": "org.xmind.branchConnection.roundedElbow"
+        }
+      },
+      "floatingTopic": {
+        "id": "25c742e0-8a57-494a-9152-5c50a5f2418b",
+        "properties": {
+          "fo:font-family": "NeverMind",
+          "fo:font-size": "14pt",
+          "fo:font-weight": "600",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "left",
+          "svg:fill": "#FF7B31",
+          "fill-pattern": "solid",
+          "line-width": "2pt",
+          "line-color": "inherited",
+          "line-pattern": "solid",
+          "border-line-color": "#FF7B31",
+          "border-line-width": "0pt",
+          "shape-class": "org.xmind.topicShape.roundedRect",
+          "line-class": "org.xmind.branchConnection.roundedElbow",
+          "arrow-end-class": "org.xmind.arrowShape.none"
+        }
+      },
+      "importantTopic": {
+        "id": "8c43dc33-fbf1-44a6-8965-6240697ba591",
+        "properties": {
+          "svg:fill": "#d14ad8",
+          "fill-pattern": "solid",
+          "border-line-color": "#d14ad8"
+        }
+      },
+      "minorTopic": {
+        "id": "6eb9c746-bbf0-4143-911e-1034b0645add",
+        "properties": {
+          "svg:fill": "#d84973",
+          "fill-pattern": "solid",
+          "border-line-color": "#d84973"
+        }
+      },
+      "expiredTopic": {
+        "id": "05041982-4075-47a7-a3f4-001d27e52c6e",
+        "properties": {
+          "fo:text-decoration": "line-through"
+        }
+      },
+      "boundary": {
+        "id": "946a5b18-06a3-4367-847a-096010fc2a10",
+        "properties": {
+          "fo:font-family": "'NeverMind','Microsoft YaHei','PingFang SC','Microsoft JhengHei','sans-serif',sans-serif",
+          "fo:font-size": "14pt",
+          "fo:font-weight": "400",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "center",
+          "svg:fill": "#191959",
+          "svg:opacity": ".2",
+          "fill-pattern": "solid",
+          "line-width": "2",
+          "line-color": "#191959",
+          "line-pattern": "dash",
+          "shape-class": "org.xmind.boundaryShape.roundedRect"
+        }
+      },
+      "summary": {
+        "id": "9a3a0383-21b1-4597-8a91-5e0fb671c91d",
+        "properties": {
+          "line-width": "2pt",
+          "line-color": "#191959",
+          "line-pattern": "solid",
+          "shape-class": "org.xmind.summaryShape.round"
+        }
+      },
+      "relationship": {
+        "id": "b3d5f768-6564-4aad-83a5-8d7fc49c57c4",
+        "properties": {
+          "fo:font-family": "'NeverMind','Microsoft YaHei','PingFang SC','Microsoft JhengHei','sans-serif',sans-serif",
+          "fo:font-size": "13pt",
+          "fo:font-weight": "400",
+          "fo:font-style": "normal",
+          "fo:color": "inherited",
+          "fo:text-transform": "manual",
+          "fo:text-decoration": "none",
+          "fo:text-align": "center",
+          "line-width": "2",
+          "line-color": "#191959",
+          "line-pattern": "dash",
+          "shape-class": "org.xmind.relationshipShape.curved",
+          "arrow-begin-class": "org.xmind.arrowShape.none",
+          "arrow-end-class": "org.xmind.arrowShape.triangle"
+        }
+      },
+      "map": {
+        "id": "3448d520-7cd2-403d-94d2-78bdc7d1bf9a",
+        "properties": {
+          "svg:fill": "#FFFFFF",
+          "multi-line-colors": "#FFABAA #FF7B31 #8CB5FF #4A51D9",
+          "color-list": "#FFFFFF #FFABAA #FF7B31 #8CB5FF #4A51D9 #191959",
+          "line-tapered": "none"
+        }
+      },
+      "skeletonThemeId": "db4a5df4db39a8cd1310ea55ea",
+      "colorThemeId": "Kimono-#FFFFFF-MULTI_LINE_COLORS"
+    }
+  }
+]
