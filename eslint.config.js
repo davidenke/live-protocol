@@ -47,7 +47,10 @@ export default eslintTs.config(
       semi: ['error', 'always'],
 
       // import sorting
-      'simple-import-sort/imports': 'error',
+      'simple-import-sort/imports': [
+        'error',
+        { groups: [...eslintPluginSimpleImportSort.defaultGroups, ['\\.css\\?inline']] },
+      ],
       'simple-import-sort/exports': 'error',
       'import/first': 'error',
       'import/newline-after-import': 'error',

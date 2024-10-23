@@ -5,6 +5,7 @@ import { customElement, eventOptions, property } from 'lit/decorators.js';
 import { when } from 'lit/directives/when.js';
 
 import { finiteOr } from '../../utils/numeric.utils.js';
+
 import styles from './numeric-stepper.component.css?inline';
 
 @customElement('xlp-numeric-stepper')

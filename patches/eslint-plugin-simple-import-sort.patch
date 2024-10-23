@@ -1,0 +1,35 @@
+diff --git a/imports.js b/imports.js
+index 5f5d6eddbdceffe25939a981ddde6e59a66814e5..24bf64e26999c7e7a55f00b8cd3e1389a7831000 100644
+--- a/imports.js
++++ b/imports.js
+@@ -19,6 +19,7 @@ const defaultGroups = [
+ ];
+ 
+ module.exports = {
++  defaultGroups: defaultGroups,
+   meta: {
+     type: "layout",
+     fixable: "code",
+diff --git a/index.d.ts b/index.d.ts
+index 9c1946b92c86285a345ef8d69dcdbd5f3b611114..77e4417b53af0b1f851c62f192232ab426d819dd 100644
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -1,5 +1,5 @@
+ import type { ESLint } from "eslint";
+ 
+-declare const eslintPluginSimpleImportSort: ESLint.Plugin;
++declare const eslintPluginSimpleImportSort: ESLint.Plugin & { defaultGroups: (string | string[])[] };
+ 
+ export = eslintPluginSimpleImportSort;
+diff --git a/index.js b/index.js
+index ee07637841068079f7d32eb1b18634f333916019..174e1bd1de1564af68e8cdcc495d1d4a9062b9ce 100644
+--- a/index.js
++++ b/index.js
+@@ -4,6 +4,7 @@ const importsRule = require("./imports");
+ const exportsRule = require("./exports");
+ 
+ module.exports = {
++  defaultGroups: importsRule.defaultGroups,
+   meta: {
+     name: "eslint-plugin-simple-import-sort",
+     version: "12.1.1",
