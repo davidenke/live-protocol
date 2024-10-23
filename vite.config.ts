@@ -1,7 +1,6 @@
 import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // Vite configuration
 // https://vitejs.dev/config/
@@ -44,7 +43,5 @@ export default defineConfig(async () => ({
   plugins: [
     // add type check directly to vite
     checker({ typescript: true, overlay: false }),
-    // polyfill `node:events` as used by `xmind-model`
-    nodePolyfills(),
   ],
 }));
