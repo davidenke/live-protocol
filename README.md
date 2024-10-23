@@ -132,6 +132,24 @@ To build the application for distribution, you can run the following command:
 pnpm build
 ```
 
+## Node backend
+
+Conversion of markdown to docx in the browser comes to a cost. We use [@adobe/helix-md2docx](https://www.npmjs.com/package/@adobe/helix-md2docx), which unfortunately uses dependencies importing node modules.\
+Thus, we have to mock those modules in our build tooling for usage in a browser context.
+
+As alternative approach, I considered conversion on the backend using a [Node.js] service.\
+This could be loaded in [Tauri via Sidecar](https://tauri.app/learn/sidecar-nodejs/). To do so, the Node service must be packed into a single binary file, which can be loaded by the Tauri application.
+
+In the Tauri examples [pkg](https://github.com/vercel/pkg) is used to pack the Node service.\
+However, this module is not maintained anymore. But fortunately, this has become a first class citizen in Node.js called [Single Executable Application (SEA)](https://nodejs.org/docs/latest-v20.x/api/single-executable-applications.html#single-executable-application-creation-process). Based on this documentation, I roughly automated this steps with a little [CLI tool](./scripts/prepare-sidecar.ts).\
+It can be used calling:
+
+```bash
+npx -y tsx ./scripts/prepare-sidecar.ts --from ./src-node/index.ts
+```
+
+It still needs to be tested on the CI, as it is unsure if the [requirements](https://github.com/nodejs/postject?tab=readme-ov-file#prerequisites) are fulfilled there. Maybe there already is a GitHub Action for this.
+
 ## Icons
 
 Most of the app icons are generated after installation using [the `tauri icon` command](https://v1.tauri.app/v1/guides/features/icons/) (s. `prepare` script in [`package.json`](./package.json)).
