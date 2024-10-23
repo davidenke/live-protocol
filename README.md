@@ -58,8 +58,12 @@ Each stepper serves a different purpose:
 Assuming you have [Rust], [nvm][nvm-nix] and [pnpm] installed, you can run the application with the following commands:
 
 ```bash
+# install dependencies
 nvm use && pnpm i
+# start app locally with dev servers
 pnpm dev
+# start frontend detached
+pnpm dev:detached
 ```
 
 ### Prerequisites

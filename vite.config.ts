@@ -58,23 +58,37 @@ export default defineConfig(async config => ({
     import: { meta: { url: 'http://localhost' } },
   },
   resolve: {
-    alias: {
+    alias: [
       // node
-      buffer: resolve(import.meta.dirname, 'src/mocks/node/buffer.ts'),
-      http2: resolve(import.meta.dirname, 'src/mocks/node/http2.ts'),
-      module: resolve(import.meta.dirname, 'src/mocks/node/module.ts'),
-      url: resolve(import.meta.dirname, 'src/mocks/node/url.ts'),
-      zlib: resolve(import.meta.dirname, 'src/mocks/node/zlib.ts'),
+      { find: 'buffer', replacement: resolve(import.meta.dirname, 'src/mocks/node/buffer.ts') },
+      { find: /^fs$/, replacement: resolve(import.meta.dirname, 'src/mocks/node/fs.ts') },
+      { find: 'fs/promises', replacement: resolve(import.meta.dirname, 'src/mocks/node/fs.promises.ts') },
+      { find: 'http2', replacement: resolve(import.meta.dirname, 'src/mocks/node/http2.ts') },
+      { find: 'module', replacement: resolve(import.meta.dirname, 'src/mocks/node/module.ts') },
+      { find: 'url', replacement: resolve(import.meta.dirname, 'src/mocks/node/url.ts') },
+      { find: 'zlib', replacement: resolve(import.meta.dirname, 'src/mocks/node/zlib.ts') },
 
       // tauri
       ...(config.mode === 'detached'
-        ? {
-            '@tauri-apps/api/window': resolve(import.meta.dirname, 'src/mocks/tauri/api.window.ts'),
-            '@tauri-apps/api/event': resolve(import.meta.dirname, 'src/mocks/tauri/api.event.ts'),
-            '@tauri-apps/plugin-dialog': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-dialog.ts'),
-            '@tauri-apps/plugin-fs': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-fs.ts'),
-          }
-        : {}),
-    },
+        ? [
+            {
+              find: '@tauri-apps/api/window',
+              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/api.window.ts'),
+            },
+            {
+              find: '@tauri-apps/api/event',
+              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/api.event.ts'),
+            },
+            {
+              find: '@tauri-apps/plugin-dialog',
+              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/plugin-dialog.ts'),
+            },
+            {
+              find: '@tauri-apps/plugin-fs',
+              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/plugin-fs.ts'),
+            },
+          ]
+        : []),
+    ],
   },
 }));
