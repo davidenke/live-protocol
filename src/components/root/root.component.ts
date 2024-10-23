@@ -53,7 +53,7 @@ export class Root extends LitElement {
     this.#listeners.push(remove);
 
     this.hasDocument = true;
-    await this.#setDocumentView(getFileName(path));
+    await this.#setDocumentView(getFileName(path).name);
   }
 
   @eventOptions({ passive: true })
