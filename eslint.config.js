@@ -1,6 +1,7 @@
 // @ts-check
 
 import eslintJs from '@eslint/js';
+import eslintPluginImport from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
@@ -10,13 +11,16 @@ export default eslintTs.config(
   eslintJs.configs.recommended,
   ...eslintTs.configs.recommended,
   eslintPluginPrettierRecommended,
+  eslintPluginImport.flatConfigs.recommended,
   {
     ignores: ['dist/', 'node_modules/'],
   },
   {
     languageOptions: {
       parserOptions: {
+        ecmaVersion: 'latest',
         project: true,
+        sourceType: 'module',
         tsconfigRootDir: './',
       },
     },
@@ -25,6 +29,14 @@ export default eslintTs.config(
     plugins: {
       'simple-import-sort': eslintPluginSimpleImportSort,
       'unused-imports': eslintPluginUnusedImports,
+    },
+  },
+  {
+    settings: {
+      'import/resolver': {
+        typescript: true,
+        node: true,
+      },
     },
   },
   {
@@ -37,6 +49,9 @@ export default eslintTs.config(
       // import sorting
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
+      'import/first': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'error',
       'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
       // unused imports
