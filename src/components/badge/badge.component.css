@@ -1,7 +1,6 @@
 :host {
   ---xlp-badge-size: var(--xlp-badge-size, 12px);
   ---xlp-badge-content-size: var(--xlp-badge-content-size, 8px);
-  ---xlp-badge-content-offset: var(--xlp-badge-content-offset, 0);
 }
 
 :host {
@@ -26,9 +25,4 @@
 :host([circular]) {
   aspect-ratio: 1;
   padding: 0;
-}
-
-slot {
-  display: block;
-  transform: translateY(var(---xlp-badge-content-offset));
 }

@@ -35,10 +35,6 @@ xlp-badge {
   --xlp-icon-size: var(---xlp-numeric-stepper-badge-icon-size);
   --xlp-badge-size: var(---xlp-numeric-stepper-badge-size);
   --xlp-badge-content-size: var(---xlp-numeric-stepper-badge-icon-size);
-
-  &:not(:has(xlp-icon)) {
-    --xlp-badge-content-offset: -0.05em;
-  }
 }
 
 xlp-icon-button {
