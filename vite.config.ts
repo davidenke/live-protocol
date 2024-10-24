@@ -60,6 +60,7 @@ export default defineConfig(async config => ({
   resolve: {
     alias: [
       // node
+      { find: 'mock:buffer', replacement: resolve(import.meta.dirname, 'node_modules/buffer') },
       { find: 'buffer', replacement: resolve(import.meta.dirname, 'src/mocks/node/buffer.ts') },
       { find: /^fs$/, replacement: resolve(import.meta.dirname, 'src/mocks/node/fs.ts') },
       { find: 'fs/promises', replacement: resolve(import.meta.dirname, 'src/mocks/node/fs.promises.ts') },
@@ -68,7 +69,7 @@ export default defineConfig(async config => ({
       { find: 'url', replacement: resolve(import.meta.dirname, 'src/mocks/node/url.ts') },
       { find: 'zlib', replacement: resolve(import.meta.dirname, 'src/mocks/node/zlib.ts') },
 
-      // tauri
+      // tauri (1)
       ...(config.mode === 'detached'
         ? [
             {

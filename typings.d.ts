@@ -23,3 +23,5 @@ declare module 'postject' {
     }>,
   ): Promise<void>;
 }
+
+declare module 'mock:buffer' {}
