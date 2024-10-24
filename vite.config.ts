@@ -5,6 +5,8 @@ import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
+import { version } from './package.json';
+
 // Vite configuration
 // https://vitejs.dev/config/
 //
@@ -38,10 +40,15 @@ export default defineConfig(async config => ({
     minify: (!process.env.TAURI_ENV_DEBUG ? 'esbuild' : false) as unknown as boolean,
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
+    // prevent mixed results in output
+    outDir: config.mode === 'detached' ? 'demo' : 'dist',
   },
 
   // add vendor prefixes to CSS automatically as needed
   css: { postcss: { plugins: [autoprefixer] } },
+
+  // deploying the demo potentially on gh pages to a subfolder
+  base: config.mode === 'detached' ? './' : '/',
 
   // we need some mocks for detached mode
   publicDir: config.mode === 'detached' ? 'mocks' : 'public',
@@ -54,7 +61,7 @@ export default defineConfig(async config => ({
     nodePolyfills({ exclude: ['buffer', 'fs', 'http2', 'module', 'url', 'zlib'] }),
   ],
   define: {
-    process: { env: {}, version: '0.0.0', mode: config.mode === 'detached' },
+    process: { env: { version }, version, mode: config.mode === 'detached' },
     import: { meta: { url: 'http://localhost' } },
   },
   resolve: {
