@@ -1,5 +1,12 @@
 # Xmind Live Protocol
 
+## [0.4.3](https://github.com/davidenke/xmind-live-protocol/compare/0.4.2...0.4.3) (2024-10-24)
+
+
+### Bug Fixes
+
+* docx export ([641527c](https://github.com/davidenke/xmind-live-protocol/commit/641527cfc300a82dffe3d2c470be12af57e3a394))
+
 ## [0.4.2](https://github.com/davidenke/xmind-live-protocol/compare/0.4.1...0.4.2) (2024-10-24)
 
 
