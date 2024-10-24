@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  gap: 2px;
+  gap: 1px;
   padding: 2px;
 
   justify-content: center;
