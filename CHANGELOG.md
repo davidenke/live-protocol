@@ -1,5 +1,12 @@
 # Xmind Live Protocol
 
+## [0.4.2](https://github.com/davidenke/xmind-live-protocol/compare/0.4.1...0.4.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* get file name from path without delimiters ([77a0981](https://github.com/davidenke/xmind-live-protocol/commit/77a0981bb0768d917504e994dfdc8dd9c9ef95ff))
+
 ## [0.4.1](https://github.com/davidenke/xmind-live-protocol/compare/0.4.0...0.4.1) (2024-10-23)
 
 # 0.4.0 (2024-10-23)
