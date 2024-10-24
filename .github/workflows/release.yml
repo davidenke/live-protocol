@@ -22,31 +22,31 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: install pnpm
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9.9.0
 
-      - name: setup node
+      - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
-      - name: setup Rust cache
+      - name: Setup Rust cache
         uses: swatinem/rust-cache@v2
         with:
           workspaces: "./src-tauri -> target"
 
-      - name: install dependencies
+      - name: Install dependencies
         run: |
           pnpm install --global release-it @release-it/conventional-changelog
           cargo install cargo-bump
 
-      - name: prepare release
+      - name: Prepare release
         run: |
           git config user.email "${{ vars.GIT_EMAIL }}"
           git config user.name "${{ vars.GIT_USER }}"
@@ -68,15 +68,45 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: provide version and commit hash
+      - name: Provide version and commit hash
         id: result
         run: |
           echo "hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "version=$(node -e "console.log(require('./package.json').version);")" >> "$GITHUB_OUTPUT"
 
+  deploy:
+    needs: prepare
+    name: Deploy ${{ needs.prepare.outputs.version }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install
+      - run: ./node_modules/.bin/vite build --mode detached
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: demo
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
+      - run: echo "Deployed ${{ needs.prepare.outputs.version }} to ${{ steps.deploy.outputs.page_url }} :tada:" >> $GITHUB_STEP_SUMMARY
+
   release:
     needs: prepare
-    name: Release
+    name: Release ${{ needs.prepare.outputs.version }} for ${{ matrix.name }}
     permissions:
       contents: write
     strategy:
@@ -104,42 +134,42 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: install dependencies (ubuntu only)
+      - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-      - name: install pnpm
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9.9.0
 
-      - name: setup node
+      - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
           cache: "pnpm"
 
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
           # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - name: setup Rust cache
+      - name: Setup Rust cache
         uses: swatinem/rust-cache@v2
         with:
           workspaces: "./src-tauri -> target"
 
-      - name: install dependencies
+      - name: Install dependencies
         run: pnpm install
 
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: __VERSION__
+          tagname: __VERSION__
           releaseName: "Xmind Live Protocol __VERSION__"
           args: ${{ matrix.args }}
 
