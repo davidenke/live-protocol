@@ -18,26 +18,40 @@ describe('file.utils', () => {
       expect(info).toHaveProperty('extension', '');
     });
 
+    it('delivers correct results for files without nested paths', () => {
+      const info = getFileName('foo-bar.txt');
+      expect(info).toHaveProperty('name', 'foo-bar.txt');
+      expect(info).toHaveProperty('base', 'foo-bar');
+      expect(info).toHaveProperty('extension', '.txt');
+    });
+
+    it('delivers correct results for files without nested paths and extension', () => {
+      const info = getFileName('foo-bar');
+      expect(info).toHaveProperty('name', 'foo-bar');
+      expect(info).toHaveProperty('base', 'foo-bar');
+      expect(info).toHaveProperty('extension', '');
+    });
+
     it.each`
       platform     | path
-      ${'unix'}    | ${'/path/to/file.txt'}
-      ${'windows'} | ${'C:\\path\\to\\file.txt'}
+      ${'unix'}    | ${'/path/to/foo-bar.txt'}
+      ${'windows'} | ${'C:\\path\\to\\foo-bar.txt'}
     `('delivers an object with file info on $platform', ({ path }) => {
       const info = getFileName(path);
       expect(info).toBeTypeOf('object');
-      expect(info).toHaveProperty('name', 'file.txt');
-      expect(info).toHaveProperty('base', 'file');
+      expect(info).toHaveProperty('name', 'foo-bar.txt');
+      expect(info).toHaveProperty('base', 'foo-bar');
       expect(info).toHaveProperty('extension', '.txt');
     });
 
     it.each`
       platform     | path
-      ${'unix'}    | ${'/path/to/file'}
-      ${'windows'} | ${'C:\\path\\to\\file'}
-    `('delivers empty strings for files without extension on $platform', ({ path }) => {
+      ${'unix'}    | ${'/path/to/foo-bar'}
+      ${'windows'} | ${'C:\\path\\to\\foo-bar'}
+    `('delivers correct results for files without extension on $platform', ({ path }) => {
       const info = getFileName(path);
-      expect(info).toHaveProperty('name', 'file');
-      expect(info).toHaveProperty('base', 'file');
+      expect(info).toHaveProperty('name', 'foo-bar');
+      expect(info).toHaveProperty('base', 'foo-bar');
       expect(info).toHaveProperty('extension', '');
     });
 
@@ -65,34 +79,34 @@ describe('file.utils', () => {
 
     it.each`
       platform     | path
-      ${'unix'}    | ${'/path/to/file.txt'}
-      ${'windows'} | ${'C:\\path\\to\\file.txt'}
+      ${'unix'}    | ${'/path/to/foo-bar.txt'}
+      ${'windows'} | ${'C:\\path\\to\\foo-bar.txt'}
     `('can handle optional custom extensions on $platform', ({ path }) => {
       const info = getFileName(path, '.txt');
-      expect(info).toHaveProperty('name', 'file.txt');
-      expect(info).toHaveProperty('base', 'file');
+      expect(info).toHaveProperty('name', 'foo-bar.txt');
+      expect(info).toHaveProperty('base', 'foo-bar');
       expect(info).toHaveProperty('extension', '.txt');
     });
 
     it.each`
       platform     | path
-      ${'unix'}    | ${'/path/to/file.tar.gz'}
-      ${'windows'} | ${'C:\\path\\to\\file.tar.gz'}
+      ${'unix'}    | ${'/path/to/foo-bar.tar.gz'}
+      ${'windows'} | ${'C:\\path\\to\\foo-bar.tar.gz'}
     `('does exact match custom extensions on $platform', ({ path }) => {
       const info = getFileName(path, '.gz');
-      expect(info).toHaveProperty('name', 'file.tar.gz');
-      expect(info).toHaveProperty('base', 'file.tar');
+      expect(info).toHaveProperty('name', 'foo-bar.tar.gz');
+      expect(info).toHaveProperty('base', 'foo-bar.tar');
       expect(info).toHaveProperty('extension', '.gz');
     });
 
     it.each`
       platform     | path
-      ${'unix'}    | ${'/path/to/file.tar.gz'}
-      ${'windows'} | ${'C:\\path\\to\\file.tar.gz'}
+      ${'unix'}    | ${'/path/to/foo-bar.tar.gz'}
+      ${'windows'} | ${'C:\\path\\to\\foo-bar.tar.gz'}
     `('does skip custom extensions if not matching exactly on $platform', ({ path }) => {
       const info = getFileName(path, '.tar');
-      expect(info).toHaveProperty('name', 'file.tar.gz');
-      expect(info).toHaveProperty('base', 'file.tar.gz');
+      expect(info).toHaveProperty('name', 'foo-bar.tar.gz');
+      expect(info).toHaveProperty('base', 'foo-bar.tar.gz');
       expect(info).toHaveProperty('extension', '');
     });
   });
