@@ -23,12 +23,21 @@ export async function readAndWatchFile(path: string, onData: (data: Uint8Array) 
 
 export type FileName = { name: string; base: string; extension: string };
 export function getFileName(path: string, suffix?: string): FileName {
-  const lastIndex = (of: string[]) => new RegExp(`[${of.join('|')}](?:.(?![${of.join('|')}]))+$`);
+  const lastIndex = (of: string[]) => new RegExp(`[${of.join('|')}](?=[^|${of.join('|')}]*$)`);
+  const returnEmpty = () => ({ name: '', base: '', extension: '' });
 
+  // handle empty or blank paths
+  if (path.trim() === '') return returnEmpty();
+
+  // extract name from path
   const nameIndex = path.search(lastIndex(['\\\\', '/']));
   const nameOffset = 1; // a single slash or backslash
-  const name = path.slice(nameIndex >= 0 ? nameIndex + nameOffset : path.length);
+  const name = path.slice(nameIndex >= 0 ? nameIndex + nameOffset : 0);
 
+  // handle paths without a name (ending with slash or backslash)
+  if (nameIndex === path.length - nameOffset) returnEmpty();
+
+  // extract extension and base name
   let base: string, extension: string;
   if (suffix !== undefined) {
     const expression = new RegExp(`${suffix.replace('.', '\\.')}$`);
@@ -41,6 +50,7 @@ export function getFileName(path: string, suffix?: string): FileName {
     extension = name.slice(extIndex >= 0 ? extIndex : name.length);
   }
 
+  // return file info
   return { name, base, extension };
 }
 
@@ -51,12 +61,4 @@ export async function exportFile(path: string, data: string | Uint8Array): Promi
   }
   // write to file
   return writeFile(path, data);
-
-  // Maybe, some day, we'll do a browser version of this function.
-  // const blob = new Blob([data], { type });
-  // const url = URL.createObjectURL(blob);
-  // const link = document.createElement('a');
-  // link.href = url;
-  // link.download = name;
-  // link.click();
 }
