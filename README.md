@@ -207,7 +207,7 @@ However, this module is not maintained anymore. But fortunately, this has become
 It can be used calling:
 
 ```bash
-npx -y tsx ./scripts/prepare-sidecar.ts --from ./src-node/index.ts
+pnpm dlx tsx ./scripts/prepare-sidecar.ts --from ./src-node/index.ts
 ```
 
 It still needs to be tested on the CI, as it is unsure if the [requirements](https://github.com/nodejs/postject?tab=readme-ov-file#prerequisites) are fulfilled there. Maybe there already is a GitHub Action for this.
