@@ -56,47 +56,23 @@ export default defineConfig(async config => ({
   plugins: [
     // add type check directly to vite
     checker({ typescript: true, overlay: false }),
-    // (1) that nasty docx converter uses node stuff, so we need to polyfill it;
-    // but some need manual mocking so they're excluded and aliased below
-    nodePolyfills({ exclude: ['buffer', 'fs', 'http2', 'module', 'url', 'zlib'] }),
+    // html-to-docx imports node modules, which are not available in the browser
+    nodePolyfills(),
   ],
   define: {
+    global: 'window',
     process: { env: { version }, version, mode: config.mode === 'detached' },
     import: { meta: { url: 'http://localhost' } },
   },
   resolve: {
-    alias: [
-      // node
-      { find: 'mock:buffer', replacement: resolve(import.meta.dirname, 'node_modules/buffer') },
-      { find: 'buffer', replacement: resolve(import.meta.dirname, 'src/mocks/node/buffer.ts') },
-      { find: /^fs$/, replacement: resolve(import.meta.dirname, 'src/mocks/node/fs.ts') },
-      { find: 'fs/promises', replacement: resolve(import.meta.dirname, 'src/mocks/node/fs.promises.ts') },
-      { find: 'http2', replacement: resolve(import.meta.dirname, 'src/mocks/node/http2.ts') },
-      { find: 'module', replacement: resolve(import.meta.dirname, 'src/mocks/node/module.ts') },
-      { find: 'url', replacement: resolve(import.meta.dirname, 'src/mocks/node/url.ts') },
-      { find: 'zlib', replacement: resolve(import.meta.dirname, 'src/mocks/node/zlib.ts') },
-
-      // tauri (1)
-      ...(config.mode === 'detached'
-        ? [
-            {
-              find: '@tauri-apps/api/window',
-              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/api.window.ts'),
-            },
-            {
-              find: '@tauri-apps/api/event',
-              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/api.event.ts'),
-            },
-            {
-              find: '@tauri-apps/plugin-dialog',
-              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/plugin-dialog.ts'),
-            },
-            {
-              find: '@tauri-apps/plugin-fs',
-              replacement: resolve(import.meta.dirname, 'src/mocks/tauri/plugin-fs.ts'),
-            },
-          ]
-        : []),
-    ],
+    alias:
+      config.mode === 'detached'
+        ? {
+            '@tauri-apps/api/window': resolve(import.meta.dirname, 'src/mocks/tauri/api.window.ts'),
+            '@tauri-apps/api/event': resolve(import.meta.dirname, 'src/mocks/tauri/api.event.ts'),
+            '@tauri-apps/plugin-dialog': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-dialog.ts'),
+            '@tauri-apps/plugin-fs': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-fs.ts'),
+          }
+        : [],
   },
 }));

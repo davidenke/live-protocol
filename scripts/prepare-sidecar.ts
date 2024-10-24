@@ -6,8 +6,8 @@ import { execPath, platform, version } from 'node:process';
 import { parseArgs, promisify } from 'node:util';
 
 import { inject } from 'postject';
-import { nodeExternals } from 'rollup-plugin-node-externals';
 import { build } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 const exec = promisify(_exec);
 const isMac = platform === 'darwin';
@@ -26,10 +26,12 @@ const { out = resolve(import.meta.dirname, '../bin') } = values;
 if (existsSync(out)) await rm(out, { recursive: true });
 await mkdir(out, { recursive: true });
 
-// compile the TypeScript code
+// compile the TypeScript code with tsc
 // const fromData = await readFile(values.from, 'utf-8');
 // const { outputText } = transpileModule(fromData, {});
 // await writeFile(resolve(out, `${name}.js`), outputText, 'utf-8');
+
+// compile the TypeScript code with vite
 const [{ output }] = (await build({
   build: {
     lib: { entry: values.from, formats: ['cjs'], fileName: name },
@@ -37,7 +39,7 @@ const [{ output }] = (await build({
     target: ['es2020', `node${version.replace(/^v(\d+)\..*$/, '$1')}`],
     write: false,
   },
-  plugins: [nodeExternals({ exclude: ['@adobe/helix-md2docx'] })],
+  plugins: [nodePolyfills({ include: ['stream'] })],
 })) as unknown as [{ output: [{ code: string; preliminaryFileName: string }] }];
 
 // remove the nasty stuff

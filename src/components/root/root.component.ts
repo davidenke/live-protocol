@@ -153,8 +153,7 @@ export class Root extends LitElement {
         const defaultPath = `${fileBaseName}.docx`;
         const filters = [{ name: 'Document', extensions: ['docx', 'doc'] }];
         const path = await save({ defaultPath, filters });
-        // const content = await convertToDocx(this.contents.md);
-        const content = await convertToDocx(`file://${this.contents.path}`);
+        const content = await convertToDocx(this.contents.html);
         if (path !== null) await exportFile(path, content);
         break;
       }

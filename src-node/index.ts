@@ -1,12 +1,12 @@
-import { argv } from 'node:process';
+// import { argv } from 'node:process';
 
-import { md2docx } from '@adobe/helix-md2docx';
+// import { md2docx } from '@adobe/helix-md2docx';
 
-(async () => {
-  console.info('Hello World!');
+// (async () => {
+//   const [, , markdown] = argv;
+//   const buffer = await md2docx(markdown);
+//   const doc = new TextDecoder().decode(buffer);
+//   console.log(doc);
+// })();
 
-  const [, , markdown] = argv;
-  const buffer = await md2docx(markdown);
-  const doc = new TextDecoder().decode(buffer);
-  console.log(doc);
-})();
+console.log('Hello World!');
