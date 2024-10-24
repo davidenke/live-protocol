@@ -157,7 +157,7 @@ pnpm build
 
 ## Deployment
 
-A browser only,preview of the application is [deployed to GitHub Pages](https://davidenke.github.io/xmind-live-protocol) on every release [by a GitHub Action](./.github/workflows/release.yml).
+A browser only preview of the application is [deployed to GitHub Pages](https://davidenke.github.io/xmind-live-protocol) on every release [by a GitHub Action](./.github/workflows/release.yml).
 
 This happens every time when changes are pushed to the `main` branch.
 
