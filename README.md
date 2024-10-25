@@ -10,7 +10,7 @@ It creates a structured document from an XMind mind map file to be used as abstr
 
 Once a mind map is opened, the protocol document will be updated automatically whenever the mind map is changed.
 
-<img src="./docs/example-transparent@1024.png" alt="Mind map with live protocol" width="800"/>
+<img src="https://github.com/davidenke/xmind-live-protocol/docs/example-transparent@1024.png" alt="Mind map with live protocol" width="800"/>
 
 While the preview is rendered from HTML, the internal representation of the mind maps structural data is generated as [Markdown](https://en.wikipedia.org/wiki/Markdown).\
 This allows for exporting the protocol document to a broad range of formats, such as plain text, PDF, or DOCX.
@@ -40,7 +40,7 @@ To open another mind map, simply close the window with the current protocol docu
 In the top right corner of the window is a tool bar containing simple stepper buttons to customize the protocol document.\
 The tool bar will be hidden when not interacting with it, the cursor is not moved for a while, or the application window is not focused. Just focus the window again and move the cursor to show the tool bar again.
 
-<img src="./docs/tool-bar.png" alt="Tool bar" width="160"/>
+<img src="https://github.com/davidenke/xmind-live-protocol/docs/tool-bar.png" alt="Tool bar" width="160"/>
 
 All steppers can be clicked on the upwards or downwards arrow to increase or decrease the value.\
 The icon in the middle of the stepper can be clicked to reset the value to its default.\
@@ -117,7 +117,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 #### Install dependencies
 
-And use correct Node.js version from [`.nvmrc`](./.nvmrc).
+And use correct Node.js version from [`.nvmrc`](https://github.com/davidenke/xmind-live-protocol/tree/main/.nvmrc).
 
 ```bash
 nvm install $(cat .nvmrc)
@@ -156,13 +156,13 @@ pnpm build
 
 ## Deployment
 
-A browser only preview of the application is [deployed to GitHub Pages](https://davidenke.github.io/xmind-live-protocol) on every release [by a GitHub Action](./.github/workflows/release.yml).
+A browser only preview of the application is [deployed to GitHub Pages](https://davidenke.github.io/xmind-live-protocol) on every release [by a GitHub Action](https://github.com/davidenke/xmind-live-protocol/tree/main/.github/workflows/release.yml).
 
 This happens every time when changes are pushed to the `main` branch.
 
 ## Release
 
-Releases are created by CI only [by a GitHub Action](./.github/workflows/release.yml). This happens in the following steps:
+Releases are created by CI only [by a GitHub Action](https://github.com/davidenke/xmind-live-protocol/tree/main/.github/workflows/release.yml). This happens in the following steps:
 
 1. Checkout with complete history
 1. Install all dependencies (including [Rust], [Node.js], and [pnpm])
@@ -177,17 +177,17 @@ This happens every time when changes are pushed to the `main` branch.
 
 ### Icons
 
-Most of the app icons are generated after installation using [the `tauri icon` command](https://v1.tauri.app/v1/guides/features/icons/) (s. `prepare` script in [`package.json`](./package.json)).
+Most of the app icons are generated after installation using [the `tauri icon` command](https://v1.tauri.app/v1/guides/features/icons/) (s. `prepare` script in [`package.json`](https://github.com/davidenke/xmind-live-protocol/tree/main/package.json)).
 
 #### App icon
 
-The only exception is the macOS icon, which is configured to be used from the [`./src/assets/icons/app.icon.icns` path](./src/assets/icons/app.icon.icns) directly. \
-This icon is sourced from its Adobe Illustrator file [`./src/assets/icons/app.icns.ai`](./src/assets/icons/app.icns.ai):
+The only exception is the macOS icon, which is configured to be used from the [`./src/assets/icons/app.icon.icns` path](https://github.com/davidenke/xmind-live-protocol/tree/main/src/assets/icons/app.icon.icns) directly. \
+This icon is sourced from its Adobe Illustrator file [`./src/assets/icons/app.icns.ai`](https://github.com/davidenke/xmind-live-protocol/tree/main/src/assets/icons/app.icns.ai):
 
 - Once opened and edited, the icon has to be exported in [eight different sizes as PNGs](https://gist.github.com/jamieweavis/b4c394607641e1280d447deed5fc85fc) and converted properly.
 - To create the files, use the Illustrator export dialog (`File → Export → Export for Screens...`).\
-  A preset can be imported from the [`./src/assets/icons/app.icns.preset`](./src/assets/icons/app.icns.preset) file.
-- Output the files to the [`./src/assets/icons/icon.iconset`](./src/assets/icons/icon.iconset) folder.
+  A preset can be imported from the [`./src/assets/icons/app.icns.preset`](https://github.com/davidenke/xmind-live-protocol/tree/main/src/assets/icons/app.icns.preset) file.
+- Output the files to the [`./src/assets/icons/icon.iconset`](https://github.com/davidenke/xmind-live-protocol/tree/main/src/assets/icons/icon.iconset) folder.
 - Then, this _folder is converted_ to an ICNS file _(Yes, you that's right!)_ using the `iconutil` command _on macOS_:\
   `iconutil --convert icns --output src/assets/icons/app.icon.icns src/assets/icons/icon.iconset`.
 
@@ -202,7 +202,7 @@ As alternative approach, I considered conversion on the backend using a [Node.js
 This could be loaded in [Tauri via Sidecar](https://tauri.app/learn/sidecar-nodejs/). To do so, the Node service must be packed into a single binary file, which can be loaded by the Tauri application.
 
 In the Tauri examples [pkg](https://github.com/vercel/pkg) is used to pack the Node service.\
-However, this module is not maintained anymore. But fortunately, this has become a first class citizen in Node.js called [Single Executable Application (SEA)](https://nodejs.org/docs/latest-v20.x/api/single-executable-applications.html#single-executable-application-creation-process). Based on this documentation, I roughly automated this steps with a little [CLI tool](./scripts/prepare-sidecar.ts).\
+However, this module is not maintained anymore. But fortunately, this has become a first class citizen in Node.js called [Single Executable Application (SEA)](https://nodejs.org/docs/latest-v20.x/api/single-executable-applications.html#single-executable-application-creation-process). Based on this documentation, I roughly automated this steps with a little [CLI tool](https://github.com/davidenke/xmind-live-protocol/tree/main/scripts/prepare-sidecar.ts).\
 It can be used calling:
 
 ```bash
