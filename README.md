@@ -10,7 +10,7 @@ It creates a structured document from an XMind mind map file to be used as abstr
 
 Once a mind map is opened, the protocol document will be updated automatically whenever the mind map is changed.
 
-<img src="https://github.com/davidenke/xmind-live-protocol/docs/example-transparent@1024.png" alt="Mind map with live protocol" width="800"/>
+<img src="https://github.com/davidenke/xmind-live-protocol/blob/main/docs/example-transparent@1024.png?raw=true" alt="Mind map with live protocol" width="800"/>
 
 While the preview is rendered from HTML, the internal representation of the mind maps structural data is generated as [Markdown](https://en.wikipedia.org/wiki/Markdown).\
 This allows for exporting the protocol document to a broad range of formats, such as plain text, PDF, or DOCX.
@@ -40,7 +40,7 @@ To open another mind map, simply close the window with the current protocol docu
 In the top right corner of the window is a tool bar containing simple stepper buttons to customize the protocol document.\
 The tool bar will be hidden when not interacting with it, the cursor is not moved for a while, or the application window is not focused. Just focus the window again and move the cursor to show the tool bar again.
 
-<img src="https://github.com/davidenke/xmind-live-protocol/docs/tool-bar.png" alt="Tool bar" width="160"/>
+<img src="https://github.com/davidenke/xmind-live-protocol/blob/main/docs/tool-bar.png?raw=true" alt="Tool bar" width="160"/>
 
 All steppers can be clicked on the upwards or downwards arrow to increase or decrease the value.\
 The icon in the middle of the stepper can be clicked to reset the value to its default.\
