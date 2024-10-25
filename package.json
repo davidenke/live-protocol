@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "prepare": "tauri icon src/assets/icons/app.icon.png",
-    "lint": "eslint -c eslint.config.js src/**/*.ts",
+    "lint": "eslint --flag unstable_ts_config -c eslint.config.ts src/**/*.ts",
     "test": "vitest",
     "dev": "tauri dev",
     "dev:detached": "vite dev --mode detached",
@@ -48,6 +48,7 @@
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unused-imports": "4.1.4",
+    "jiti": "2.3.3",
     "postcss": "8.4.47",
     "postject": "1.0.0-alpha.6",
     "prettier": "3.3.3",
