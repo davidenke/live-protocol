@@ -18,8 +18,8 @@ export const open: typeof PluginDialog.open<PluginDialog.OpenDialogOptions> = as
     input.onchange = (event: Event) => {
       event.preventDefault();
       if (!input.files?.length) return resolve(null);
-      const [file] = input.files;
-      resolve(__preStoreFile(file));
+      const file = input.files.item(0);
+      resolve(__preStoreFile(file!));
     };
     input.click();
   });
