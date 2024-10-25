@@ -1,5 +1,7 @@
 # Xmind Live Protocol
 
+## [0.4.4](https://github.com/davidenke/xmind-live-protocol/compare/0.4.3...0.4.4) (2024-10-25)
+
 ## [0.4.3](https://github.com/davidenke/xmind-live-protocol/compare/0.4.2...0.4.3) (2024-10-24)
 
 
