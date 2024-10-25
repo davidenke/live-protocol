@@ -59,6 +59,12 @@
     "vite-plugin-node-polyfills": "0.22.0",
     "vitest": "2.1.3"
   },
+  "bugs": "https://github.com/davidenke/xmind-live-protocol/issues",
+  "homepage": "https://github.com/davidenke/xmind-live-protocol#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidenke/xmind-live-protocol.git"
+  },
   "license": "MIT",
   "pnpm": {
     "patchedDependencies": {
