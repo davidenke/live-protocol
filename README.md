@@ -1,6 +1,6 @@
 <a href="https://github.com/davidenke/xmind-live-protocol/releases/latest"><img src="https://img.shields.io/github/v/release/davidenke/xmind-live-protocol?label=%40latest" alt="Latest version"/></a>
 <a href="https://github.com/davidenke/xmind-live-protocol/actions/workflows/release.yml"><img src="https://img.shields.io/github/actions/workflow/status/davidenke/xmind-live-protocol/release.yml?label=tests" alt="Test status"/></a>
-<a href="https://github.com/davidenke/xmind-live-protocol"><img src="https://img.shields.io/badge/github-sources-blue" alt="Test and build status"/></a>
+<a href="https://github.com/davidenke/xmind-live-protocol"><img src="https://img.shields.io/badge/github-sources-blue" alt="Source on GitHub"/></a>
 <a href="https://davidenke.github.io/xmind-live-protocol"><img src="https://img.shields.io/badge/demo-app-yellow?logoSize=50px" alt="Demo app"/></a>
 
 # Xmind live protocol
