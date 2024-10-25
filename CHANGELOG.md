@@ -1,5 +1,12 @@
 # Xmind Live Protocol
 
+# [0.5.0](https://github.com/davidenke/xmind-live-protocol/compare/0.4.4...0.5.0) (2024-10-25)
+
+
+### Features
+
+* **demo:** handle dropped files ([a1b117f](https://github.com/davidenke/xmind-live-protocol/commit/a1b117f8f6549cf9e4c5c3e9cd207d68d45d8578))
+
 ## [0.4.4](https://github.com/davidenke/xmind-live-protocol/compare/0.4.3...0.4.4) (2024-10-25)
 
 ## [0.4.3](https://github.com/davidenke/xmind-live-protocol/compare/0.4.2...0.4.3) (2024-10-24)

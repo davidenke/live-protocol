@@ -1,6 +1,6 @@
 {
   "name": "xmind-live-protocol",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "An application to generate protocol documents from XMind mind maps.",
   "bin": "dist/index.js",
   "type": "module",
