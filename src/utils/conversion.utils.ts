@@ -1,4 +1,3 @@
-// import { md2docx } from '@adobe/helix-md2docx';
 import HTMLtoDOCX from '@turbodocx/html-to-docx';
 import { parse } from 'marked';
 import type { Sheet, Topic, Workbook } from 'xmind-model';
@@ -68,13 +67,14 @@ export async function convertToHtml(markdown: string): Promise<string> {
 
 /**
  * Convert html to docx
+ * https://github.com/turbodocx/html-to-docx
  */
 export async function convertToDocx(html: string): Promise<Uint8Array> {
-  // return md2docx(markdown);
   return HTMLtoDOCX(html, undefined, {
     table: { row: { cantSplit: true } },
     footer: true,
     pageNumber: true,
+    font: '',
     preprocessing: { skipHTMLMinify: false },
   });
 }
