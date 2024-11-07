@@ -1,5 +1,7 @@
 # Live Protocol
 
+## [0.5.2](https://github.com/davidenke/live-protocol/compare/0.5.1...0.5.2) (2024-11-07)
+
 ## [0.5.1](https://github.com/davidenke/live-protocol/compare/0.5.0...0.5.1) (2024-11-07)
 
 # Xmind Live Protocol

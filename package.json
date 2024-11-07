@@ -1,6 +1,6 @@
 {
   "name": "live-protocol",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "An application to generate protocol documents from mind maps.",
   "bin": "dist/index.js",
   "type": "module",
