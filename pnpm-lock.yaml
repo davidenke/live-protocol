@@ -104,6 +104,9 @@ importers:
       eslint-plugin-wc:
         specifier: 2.2.0
         version: 2.2.0(eslint@9.13.0(jiti@2.3.3))
+      fast-glob:
+        specifier: 3.3.2
+        version: 3.3.2
       jiti:
         specifier: 2.3.3
         version: 2.3.3

@@ -70,7 +70,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pnpm install --global release-it @release-it/conventional-changelog
+          pnpm add --global tsx release-it @release-it/conventional-changelog
           cargo install cargo-bump
 
       - name: Prepare release
@@ -121,8 +121,12 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-      - run: pnpm install
-      - run: ./node_modules/.bin/vite build --mode detached
+      - run: |
+          pnpm install
+          ./node_modules/.bin/vite build --mode detached
+      - run: |
+          pnpm add --global tsx
+          pnpm dlx tsx ./scripts/set-version.ts ${{ needs.prepare.outputs.version }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: demo
