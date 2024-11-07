@@ -103,7 +103,7 @@ jobs:
 
   deploy:
     needs: prepare
-    name: Deploy ${{ needs.prepare.outputs.version }}
+    name: Deploy
     permissions:
       contents: read
       pages: write
@@ -133,7 +133,7 @@ jobs:
 
   release:
     needs: prepare
-    name: Release ${{ needs.prepare.outputs.version }} for ${{ matrix.name }}
+    name: Release for ${{ matrix.name }}
     permissions:
       contents: write
     strategy:
