@@ -1,8 +1,10 @@
 import eslintJs from '@eslint/js';
 import eslintPluginImport from 'eslint-plugin-import';
+import eslintPluginLit from 'eslint-plugin-lit';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
+import eslintPluginWC from 'eslint-plugin-wc';
 import eslintTs from 'typescript-eslint';
 
 export default eslintTs.config(
@@ -10,6 +12,10 @@ export default eslintTs.config(
   ...eslintTs.configs.recommended,
   eslintPluginPrettierRecommended,
   eslintPluginImport.flatConfigs.recommended,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  eslintPluginWC.configs['flat/recommended'] as any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  eslintPluginLit.configs['flat/recommended'] as any,
   {
     ignores: ['dist/', 'node_modules/'],
   },
@@ -47,7 +53,7 @@ export default eslintTs.config(
       // import sorting
       'simple-import-sort/imports': [
         'error',
-        { groups: [...eslintPluginSimpleImportSort.defaultGroups, ['\\.css\\?inline']] },
+        // { groups: [...eslintPluginSimpleImportSort.defaultGroups, ['\\.css\\?inline']] },
       ],
       'simple-import-sort/exports': 'error',
       'import/first': 'error',

@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    xmind_live_protocol_lib::run()
+    live_protocol_lib::run()
 }

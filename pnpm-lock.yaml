@@ -101,6 +101,9 @@ importers:
       eslint-plugin-unused-imports:
         specifier: 4.1.4
         version: 4.1.4(@typescript-eslint/eslint-plugin@8.11.0(@typescript-eslint/parser@8.11.0(eslint@9.13.0(jiti@2.3.3))(typescript@5.6.3))(eslint@9.13.0(jiti@2.3.3))(typescript@5.6.3))(eslint@9.13.0(jiti@2.3.3))
+      eslint-plugin-wc:
+        specifier: 2.2.0
+        version: 2.2.0(eslint@9.13.0(jiti@2.3.3))
       jiti:
         specifier: 2.3.3
         version: 2.3.3
@@ -1228,6 +1231,11 @@ packages:
       '@typescript-eslint/eslint-plugin':
         optional: true
 
+  eslint-plugin-wc@2.2.0:
+    resolution: {integrity: sha512-kjPp+aXz23fOl0JZJOJS+6adwhEv98KjZ2FJqWpc4vtmk4Oenz/JJmmNZrGSARgtyR0BLIF/kVWC6GSlHA+5MA==}
+    peerDependencies:
+      eslint: '>=8.40.0'
+
   eslint-scope@8.1.0:
     resolution: {integrity: sha512-14dSvlhaVhKKsa9Fx1l8A17s7ah7Ef7wCakJ10LYk6+GYmP9yDti2oq2SEwcyndt6knfcZyhyxwY3i9yL78EQw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1550,6 +1558,9 @@ packages:
   is-object@1.0.2:
     resolution: {integrity: sha512-2rRIahhZr2UWb45fIOuvZGpFtz0TyOZLf32KxBbSoUCeZR495zCKlWUKKUByk3geS2eAs7ZAABt0Y/Rx0GiQGA==}
 
+  is-potential-custom-element-name@1.0.1:
+    resolution: {integrity: sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==}
+
   is-regex@1.1.4:
     resolution: {integrity: sha512-kvRdxDsxZjhzUX07ZnLydzS1TU/TJlTUHHY4YLL87e37oUA49DfkLqgy+VjFocowy29cKvcSiu+kIv728jTTVg==}
     engines: {node: '>= 0.4'}
@@ -1570,6 +1581,9 @@ packages:
     resolution: {integrity: sha512-uZ25/bUAlUY5fR4OKT4rZQEBrzQWYV9ZJYGGsUmEJ6thodVJ1HX64ePQ6Z0qPWP+m+Uq6e9UugrE38jeYsDSMw==}
     engines: {node: '>= 0.4'}
 
+  is-valid-element-name@1.0.0:
+    resolution: {integrity: sha512-GZITEJY2LkSjQfaIPBha7eyZv+ge0PhBR7KITeCCWvy7VBQrCUdFkvpI+HrAPQjVtVjy1LvlEkqQTHckoszruw==}
+
   is-weakref@1.0.2:
     resolution: {integrity: sha512-qctsuLZmIQ0+vSSMfoVvyFe2+GSEvnmZ2ezTup1SBse9+twCCeial6EEi3Nc2KFcf6+qz2FBPnjXsk8xhKSaPQ==}
 
@@ -1589,6 +1603,9 @@ packages:
   jiti@2.3.3:
     resolution: {integrity: sha512-EX4oNDwcXSivPrw2qKH2LB5PoFxEvgtv2JgwW0bU858HoLQ+kutSvjLMUqBd0PeJYEinLWhoI9Ol0eYMqj/wNQ==}
     hasBin: true
+
+  js-levenshtein-esm@1.2.0:
+    resolution: {integrity: sha512-fzreKVq1eD7eGcQr7MtRpQH94f8gIfhdrc7yeih38xh684TNMK9v5aAu2wxfIRMk/GpAJRrzcirMAPIaSDaByQ==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3574,6 +3591,12 @@ snapshots:
     optionalDependencies:
       '@typescript-eslint/eslint-plugin': 8.11.0(@typescript-eslint/parser@8.11.0(eslint@9.13.0(jiti@2.3.3))(typescript@5.6.3))(eslint@9.13.0(jiti@2.3.3))(typescript@5.6.3)
 
+  eslint-plugin-wc@2.2.0(eslint@9.13.0(jiti@2.3.3)):
+    dependencies:
+      eslint: 9.13.0(jiti@2.3.3)
+      is-valid-element-name: 1.0.0
+      js-levenshtein-esm: 1.2.0
+
   eslint-scope@8.1.0:
     dependencies:
       esrecurse: 4.3.0
@@ -3937,6 +3960,8 @@ snapshots:
 
   is-object@1.0.2: {}
 
+  is-potential-custom-element-name@1.0.1: {}
+
   is-regex@1.1.4:
     dependencies:
       call-bind: 1.0.7
@@ -3958,6 +3983,10 @@ snapshots:
     dependencies:
       which-typed-array: 1.1.15
 
+  is-valid-element-name@1.0.0:
+    dependencies:
+      is-potential-custom-element-name: 1.0.1
+
   is-weakref@1.0.2:
     dependencies:
       call-bind: 1.0.7
@@ -3971,6 +4000,8 @@ snapshots:
   isomorphic-timers-promises@1.0.1: {}
 
   jiti@2.3.3: {}
+
+  js-levenshtein-esm@1.2.0: {}
 
   js-tokens@4.0.0: {}
 
