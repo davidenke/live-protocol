@@ -1,6 +1,6 @@
 [package]
 name = "live-protocol"
-version = "0.5.0"
+version = "0.5.1"
 description = "Generate protocols from mind maps"
 authors = ["David Enke<david@enke.dev>"]
 edition = "2021"
