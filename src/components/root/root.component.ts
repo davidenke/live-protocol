@@ -242,7 +242,7 @@ export class Root extends LitElement {
             <xlp-select-file background @path="${this.loadFile}"
               ><xlp-icon>upload_file</xlp-icon></xlp-select-file
             >
-            <xlp-tool-bar role="navigation" hide-after="2000">
+            <xlp-tool-bar role="navigation">
               <xlp-numeric-stepper
                 @change="${this.setVisibilityLevel}"
                 min="1"
