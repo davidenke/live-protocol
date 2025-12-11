@@ -116,7 +116,7 @@ export function convertTopicByLevel(
 ): string {
   const { useHeadlinesUntilLevel, useOrderedListsUntilLevel, useUnorderedListsUntilLevel } =
     options;
-  const title = topic.getTitle();
+  const title = topic.getTitle() ?? '';
 
   // headlines come first, as they can not be within lists
   if (level <= useHeadlinesUntilLevel) {
@@ -169,6 +169,6 @@ export function renderText(text: string, depth: number): string {
 /**
  * Removes line breaks from a given string
  */
-export function removeLineBreaks(headline: string): string {
-  return headline.replace(/(\r\n|\n|\r)/gm, '');
+export function removeLineBreaks(text: string): string {
+  return text.replace(/(\r\n|\n|\r)/gm, '');
 }
