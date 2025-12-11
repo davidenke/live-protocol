@@ -66,7 +66,7 @@ export default defineConfig(config => {
     define: {
       global: 'window',
       process: { env: { version }, version },
-      import: { meta: { url: 'http://localhost' } },
+      // import: { meta: { url: 'http://localhost' } },
     },
     resolve: {
       alias:
