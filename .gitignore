@@ -12,6 +12,7 @@ bin
 demo
 dist
 *.local
+src-tauri/icons
 src/assets/icons/icon.iconset/*
 !src/assets/icons/icon.iconset/.gitkeep
 

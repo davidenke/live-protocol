@@ -12,7 +12,7 @@ import { version } from './package.json';
 //
 // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
 // https://tauri.app/start/frontend/vite/#update-vite-configuration
-export default defineConfig(async config => ({
+export default defineConfig(config => ({
   // prevent vite from obscuring rust errors
   clearScreen: false,
   server: {
@@ -61,7 +61,7 @@ export default defineConfig(async config => ({
   ],
   define: {
     global: 'window',
-    process: { env: { version }, version, mode: config.mode === 'detached' },
+    process: { env: { version }, version },
     import: { meta: { url: 'http://localhost' } },
   },
   resolve: {
@@ -70,7 +70,10 @@ export default defineConfig(async config => ({
         ? {
             '@tauri-apps/api/window': resolve(import.meta.dirname, 'src/mocks/tauri/api.window.ts'),
             '@tauri-apps/api/event': resolve(import.meta.dirname, 'src/mocks/tauri/api.event.ts'),
-            '@tauri-apps/plugin-dialog': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-dialog.ts'),
+            '@tauri-apps/plugin-dialog': resolve(
+              import.meta.dirname,
+              'src/mocks/tauri/plugin-dialog.ts'
+            ),
             '@tauri-apps/plugin-fs': resolve(import.meta.dirname, 'src/mocks/tauri/plugin-fs.ts'),
           }
         : [],
