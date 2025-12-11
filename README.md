@@ -62,11 +62,11 @@ Each stepper serves a different purpose:
 
 ### tl;dr
 
-Assuming you have [Rust], [nvm][nvm-nix] and [pnpm] installed, you can run the application with the following commands:
+Assuming you have [Rust], [fnm] / [nvm (Unix)][nvm-nix] or [nvm (Windows)][nvm-win] and [pnpm] installed, you can run the application with the following commands:
 
 ```bash
 # install dependencies
-nvm use && pnpm i
+fnm use && pnpm i
 
 # start app with dev servers
 pnpm dev
@@ -104,7 +104,7 @@ The application is built with [Tauri], a framework for building desktop applicat
 ```bash
 xcode-select --install
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+cargo install fnm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
@@ -112,18 +112,18 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 1. Rust\
    → https://v1.tauri.app/v1/guides/getting-started/prerequisites/#setting-up-windows
-1. [Version manager][nvm-win] for [Node.js]\
-   → https://github.com/coreybutler/nvm-windows?tab=readme-ov-file#install-nvm-windows
+1. [Version manager][fnm] for [Node.js]\
+   → https://github.com/Schniz/fnm?tab=readme-ov-file#installation
 1. [pnpm] package manager\
    → https://pnpm.io/installation#on-windows
 
 #### Install dependencies
 
-And use correct Node.js version from [`.nvmrc`](https://github.com/davidenke/live-protocol/tree/main/.nvmrc).
+And use correct Node.js version from [`.node-version`](https://github.com/davidenke/live-protocol/tree/main/.node-version).
 
 ```bash
-nvm install $(cat .nvmrc)
-nvm use $(cat .nvmrc)
+fnm install
+fnm use
 pnpm install
 ```
 
@@ -218,6 +218,7 @@ It still needs to be tested on the CI, as it is unsure if the [requirements](htt
 [Tauri]: https://tauri.app/
 [Vite]: https://vitejs.dev/
 [Node.js]: https://nodejs.org/
+[fnm]: https://fnm.vercel.app/
 [nvm-nix]: https://github.com/nvm-sh/nvm
 [nvm-win]: https://github.com/coreybutler/nvm-windows
 [release-it]: github.com/release-it/release-it
