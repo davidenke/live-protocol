@@ -1,10 +1,13 @@
+/* eslint-disable no-console */
 import type * as PluginDialog from '@tauri-apps/plugin-dialog';
 
 import { __preStoreFile } from './plugin-fs.js';
 
 // use a native file dialog to open a file, by creating an input element
 // in the browser and simulating a click on it
-export const open: typeof PluginDialog.open<PluginDialog.OpenDialogOptions> = async ({ filters } = {}) => {
+export const open: typeof PluginDialog.open<PluginDialog.OpenDialogOptions> = async ({
+  filters,
+} = {}) => {
   const extensions = filters?.flatMap(({ extensions }) => extensions);
   const input = document.createElement('input');
   input.accept = extensions?.map(ext => `.${ext}`).join(',') ?? '*';
@@ -17,9 +20,11 @@ export const open: typeof PluginDialog.open<PluginDialog.OpenDialogOptions> = as
     };
     input.onchange = (event: Event) => {
       event.preventDefault();
-      if (!input.files?.length) return resolve(null);
+      if (!input.files?.length) {
+        return resolve(null);
+      }
       const file = input.files.item(0);
-      resolve(__preStoreFile(file!));
+      resolve(__preStoreFile(file as File));
     };
     input.click();
   });

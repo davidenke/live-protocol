@@ -1,4 +1,5 @@
-import { readFile, type WatchEvent, watchImmediate, writeFile } from '@tauri-apps/plugin-fs';
+import type { WatchEvent } from '@tauri-apps/plugin-fs';
+import { readFile, watchImmediate, writeFile } from '@tauri-apps/plugin-fs';
 
 export function isWatchedFileDataModified(event: WatchEvent): boolean {
   return (
@@ -9,7 +10,10 @@ export function isWatchedFileDataModified(event: WatchEvent): boolean {
   );
 }
 
-export async function readAndWatchFile(path: string, onData: (data: Uint8Array) => void): Promise<() => void> {
+export async function readAndWatchFile(
+  path: string,
+  onData: (data: Uint8Array) => void
+): Promise<() => void> {
   // read initially
   onData(await readFile(path));
   // watch for changes
@@ -21,13 +25,19 @@ export async function readAndWatchFile(path: string, onData: (data: Uint8Array) 
   });
 }
 
-export type FileName = { name: string; base: string; extension: string };
+export interface FileName {
+  name: string;
+  base: string;
+  extension: string;
+}
 export function getFileName(path: string, suffix?: string): FileName {
   const lastIndex = (of: string[]) => new RegExp(`[${of.join('|')}](?=[^|${of.join('|')}]*$)`);
   const returnEmpty = () => ({ name: '', base: '', extension: '' });
 
   // handle empty or blank paths
-  if (path.trim() === '') return returnEmpty();
+  if (path.trim() === '') {
+    return returnEmpty();
+  }
 
   // extract name from path
   const nameIndex = path.search(lastIndex(['\\\\', '/']));
@@ -35,7 +45,9 @@ export function getFileName(path: string, suffix?: string): FileName {
   const name = path.slice(nameIndex >= 0 ? nameIndex + nameOffset : 0);
 
   // handle paths without a name (ending with slash or backslash)
-  if (nameIndex === path.length - nameOffset) returnEmpty();
+  if (nameIndex === path.length - nameOffset) {
+    returnEmpty();
+  }
 
   // extract extension and base name
   let base: string, extension: string;

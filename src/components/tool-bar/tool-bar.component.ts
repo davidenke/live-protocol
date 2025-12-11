@@ -27,7 +27,7 @@ export class ToolBar extends LitElement {
     // start new timeout to hide
     this.#currentTimeoutId = window.setTimeout(
       () => (this.hidden = true),
-      this.#isInteractive ? Infinity : this.hideAfter,
+      this.#isInteractive ? Infinity : this.hideAfter
     );
   };
 

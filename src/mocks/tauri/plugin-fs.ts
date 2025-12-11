@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type * as PluginFs from '@tauri-apps/plugin-fs';
 
 import { getFileName } from '../../utils/file.utils.js';
@@ -34,7 +35,7 @@ export const readFile: typeof PluginFs.readFile = async path => {
       const buffer = reader.result as ArrayBuffer;
       resolve(new Uint8Array(buffer));
     };
-    reader.readAsArrayBuffer(__files.get(path)!);
+    reader.readAsArrayBuffer(__files.get(path) as File);
   });
 };
 
@@ -43,6 +44,7 @@ export const readFile: typeof PluginFs.readFile = async path => {
 // File System Observer: https://github.com/whatwg/fs/blob/main/proposals/FileSystemObserver.md
 export const watchImmediate: typeof PluginFs.watchImmediate = async path => {
   console.info('tauri:', 'watchImmediate', path);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   return () => {};
 };
 
@@ -57,7 +59,7 @@ export const writeFile: typeof PluginFs.writeFile = async (path, data) => {
   };
   const { extension } = getFileName(path.toString());
   const type = mimeTypes[extension] ?? 'application/octet-stream';
-  const blob = new Blob([data], { type });
+  const blob = new Blob([data as BlobPart], { type });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;

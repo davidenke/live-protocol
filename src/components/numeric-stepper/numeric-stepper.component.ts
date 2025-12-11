@@ -32,7 +32,9 @@ export class NumericStepper extends LitElement {
     const next = finiteOr(this.value - 1, finiteOr(this.min, finiteOr(this.max, 0)));
     const value = Math.max(next, this.min);
 
-    if (value === this.value) return;
+    if (value === this.value) {
+      return;
+    }
     this.dispatchEvent(new CustomEvent('change', { detail: value }));
     this.dispatchEvent(new CustomEvent('decrease', { detail: value }));
   }
@@ -42,7 +44,9 @@ export class NumericStepper extends LitElement {
     const next = finiteOr(this.value + 1, finiteOr(this.max, finiteOr(this.min, 0)));
     const value = Math.min(next, this.max);
 
-    if (value === this.value) return;
+    if (value === this.value) {
+      return;
+    }
     this.dispatchEvent(new CustomEvent('change', { detail: value }));
     this.dispatchEvent(new CustomEvent('increase', { detail: value }));
   }
@@ -59,7 +63,7 @@ export class NumericStepper extends LitElement {
         ${when(
           !Number.isFinite(this.value),
           () => html`<xlp-icon>all_inclusive</xlp-icon>`,
-          () => this.value,
+          () => this.value
         )}
       </xlp-badge>
       <xlp-icon-button ?disabled="${this.disabled}" @click="${this.increase}">

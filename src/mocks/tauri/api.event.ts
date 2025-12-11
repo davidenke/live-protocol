@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type * as ApiEvent from '@tauri-apps/api/event';
 
 import { __preStoreFile } from './plugin-fs.js';
@@ -22,7 +23,7 @@ export const listen: typeof ApiEvent.listen<Event> = async (name, handler) => {
         // we need a proper array instead of a list
         .from(dataTransfer?.items ?? [])
         // pre-store the files and hand out the identifiers
-        .map(item => __preStoreFile(item.getAsFile()!));
+        .map(item => __preStoreFile(item.getAsFile() as File));
     }
 
     handler({ id: 0, event: name, payload: { ...domEvent, ...extras } });

@@ -11,7 +11,9 @@ export class TitleBar extends LitElement {
   @eventOptions({ capture: true })
   handleDragging(event: MouseEvent) {
     // too many buttons pressed
-    if (event.buttons !== 1) return;
+    if (event.buttons !== 1) {
+      return;
+    }
 
     // prevent text selection and start dragging
     // https://tauri.app/plugin/window-customization/#manual-implementation-of-data-tauri-drag-region

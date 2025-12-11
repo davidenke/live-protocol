@@ -7,7 +7,7 @@ import type { Sheet, Topic, Workbook } from 'xmind-model';
  */
 export type MindMap = Workbook;
 
-export type ConversionOptions = {
+export interface ConversionOptions {
   /**
    * Topics until this level will be visible.
    * Minimum value is 1, no maximum value, default is Infinity.
@@ -35,9 +35,11 @@ export type ConversionOptions = {
    * @default Infinity
    */
   useUnorderedListsUntilLevel: number;
-};
+}
 
-export function conversionOptionsWithDefaults(options: Partial<ConversionOptions> = {}): ConversionOptions {
+export function conversionOptionsWithDefaults(
+  options: Partial<ConversionOptions> = {}
+): ConversionOptions {
   return {
     useUntilLevel: Infinity,
     useHeadlinesUntilLevel: 2,
@@ -89,10 +91,16 @@ export function convertSheetToMarkdown(sheet: Sheet, options: ConversionOptions)
 /**
  * Convert a single given topic into markdown.
  */
-export function convertTopicToMarkdown(topic: Topic, level: number, options: ConversionOptions): string {
+export function convertTopicToMarkdown(
+  topic: Topic,
+  level: number,
+  options: ConversionOptions
+): string {
   const { useUntilLevel } = options;
   const text = convertTopicByLevel(topic, level, options);
-  if (level >= useUntilLevel) return text;
+  if (level >= useUntilLevel) {
+    return text;
+  }
 
   const attachedTopics = topic
     .getChildrenByType(['attached'])
@@ -101,8 +109,13 @@ export function convertTopicToMarkdown(topic: Topic, level: number, options: Con
   return `${text}${attachedTopics}`;
 }
 
-export function convertTopicByLevel(topic: Topic, level: number, options: ConversionOptions): string {
-  const { useHeadlinesUntilLevel, useOrderedListsUntilLevel, useUnorderedListsUntilLevel } = options;
+export function convertTopicByLevel(
+  topic: Topic,
+  level: number,
+  options: ConversionOptions
+): string {
+  const { useHeadlinesUntilLevel, useOrderedListsUntilLevel, useUnorderedListsUntilLevel } =
+    options;
   const title = topic.getTitle();
 
   // headlines come first, as they can not be within lists

@@ -14,13 +14,8 @@ import { customElement, eventOptions, property, state } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 
-import {
-  type ConversionOptions,
-  convertToDocx,
-  convertToHtml,
-  convertToMarkdown,
-  type MindMap,
-} from '../../utils/conversion.utils.js';
+import type { ConversionOptions, MindMap } from '../../utils/conversion.utils.js';
+import { convertToDocx, convertToHtml, convertToMarkdown } from '../../utils/conversion.utils.js';
 import { exportFile, getFileName, readAndWatchFile } from '../../utils/file.utils.js';
 import { readMindMap } from '../../utils/xmind.utils.js';
 
@@ -31,7 +26,7 @@ export class Root extends LitElement {
   static override readonly styles = unsafeCSS(styles);
 
   readonly #window = getCurrentWindow();
-  readonly #listeners: Array<() => void> = [];
+  readonly #listeners: (() => void)[] = [];
 
   @state()
   conversionOptions: ConversionOptions = {
@@ -79,12 +74,23 @@ export class Root extends LitElement {
     this.conversionOptions = {
       ...this.conversionOptions,
       useUntilLevel,
-      useHeadlinesUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useHeadlinesUntilLevel) as 0,
-      useOrderedListsUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useOrderedListsUntilLevel),
-      useUnorderedListsUntilLevel: Math.min(useUntilLevel, this.conversionOptions.useUnorderedListsUntilLevel),
+      useHeadlinesUntilLevel: Math.min(
+        useUntilLevel,
+        this.conversionOptions.useHeadlinesUntilLevel
+      ) as 0,
+      useOrderedListsUntilLevel: Math.min(
+        useUntilLevel,
+        this.conversionOptions.useOrderedListsUntilLevel
+      ),
+      useUnorderedListsUntilLevel: Math.min(
+        useUntilLevel,
+        this.conversionOptions.useUnorderedListsUntilLevel
+      ),
     };
 
-    if (this.contents === undefined) return;
+    if (this.contents === undefined) {
+      return;
+    }
     this.#renderContents(this.contents.path);
   }
 
@@ -94,11 +100,19 @@ export class Root extends LitElement {
     this.conversionOptions = {
       ...this.conversionOptions,
       useHeadlinesUntilLevel,
-      useOrderedListsUntilLevel: Math.max(useHeadlinesUntilLevel, this.conversionOptions.useOrderedListsUntilLevel),
-      useUnorderedListsUntilLevel: Math.max(useHeadlinesUntilLevel, this.conversionOptions.useUnorderedListsUntilLevel),
+      useOrderedListsUntilLevel: Math.max(
+        useHeadlinesUntilLevel,
+        this.conversionOptions.useOrderedListsUntilLevel
+      ),
+      useUnorderedListsUntilLevel: Math.max(
+        useHeadlinesUntilLevel,
+        this.conversionOptions.useUnorderedListsUntilLevel
+      ),
     };
 
-    if (this.contents === undefined) return;
+    if (this.contents === undefined) {
+      return;
+    }
     this.#renderContents(this.contents.path);
   }
 
@@ -109,7 +123,9 @@ export class Root extends LitElement {
       useOrderedListsUntilLevel: Math.min(this.conversionOptions.useUntilLevel, value ?? 4),
     };
 
-    if (this.contents === undefined) return;
+    if (this.contents === undefined) {
+      return;
+    }
     this.#renderContents(this.contents.path);
   }
 
@@ -117,17 +133,24 @@ export class Root extends LitElement {
   setUnorderedListLevel({ detail: value }: CustomEvent<number>) {
     this.conversionOptions = {
       ...this.conversionOptions,
-      useUnorderedListsUntilLevel: Math.min(this.conversionOptions.useUntilLevel, value ?? Infinity),
+      useUnorderedListsUntilLevel: Math.min(
+        this.conversionOptions.useUntilLevel,
+        value ?? Infinity
+      ),
     };
 
-    if (this.contents === undefined) return;
+    if (this.contents === undefined) {
+      return;
+    }
     this.#renderContents(this.contents.path);
   }
 
   @eventOptions({ passive: true })
   async exportFile(event: Event) {
     // we need contents in any case
-    if (this.contents === undefined) return;
+    if (this.contents === undefined) {
+      return;
+    }
 
     // read the format from the event target and handle it, albeit markdown and
     // html are already available and don't have to be explicitly converted
@@ -139,14 +162,18 @@ export class Root extends LitElement {
         const defaultPath = `${fileBaseName}.md`;
         const filters = [{ name: 'Markdown', extensions: ['md', 'mdx', 'markdown'] }];
         const path = await save({ defaultPath, filters });
-        if (path !== null) await exportFile(path, this.contents.md);
+        if (path !== null) {
+          await exportFile(path, this.contents.md);
+        }
         break;
       }
       case 'html': {
         const defaultPath = `${fileBaseName}.html`;
         const filters = [{ name: 'HTML', extensions: ['html', 'htm'] }];
         const path = await save({ defaultPath, filters });
-        if (path !== null) await exportFile(path, this.contents.html);
+        if (path !== null) {
+          await exportFile(path, this.contents.html);
+        }
         break;
       }
       case 'docx': {
@@ -154,7 +181,9 @@ export class Root extends LitElement {
         const filters = [{ name: 'Document', extensions: ['docx', 'doc'] }];
         const path = await save({ defaultPath, filters });
         const content = await convertToDocx(this.contents.html);
-        if (path !== null) await exportFile(path, content);
+        if (path !== null) {
+          await exportFile(path, content);
+        }
         break;
       }
     }
@@ -189,7 +218,9 @@ export class Root extends LitElement {
   }
 
   async #renderContents(path: string) {
-    if (this.mindMap === undefined) return;
+    if (this.mindMap === undefined) {
+      return;
+    }
     const md = convertToMarkdown(this.mindMap, this.conversionOptions);
     const html = await convertToHtml(md);
     this.contents = { path, md, html };
@@ -202,11 +233,15 @@ export class Root extends LitElement {
           !this.hasDocument,
           () => html`
             <xlp-title-bar role="banner"></xlp-title-bar>
-            <xlp-select-file @path="${this.loadFile}"><xlp-icon>upload_file</xlp-icon></xlp-select-file>
+            <xlp-select-file @path="${this.loadFile}"
+              ><xlp-icon>upload_file</xlp-icon></xlp-select-file
+            >
           `,
           () => html`
             <xlp-preview>${unsafeHTML(this.contents?.html)}</xlp-preview>
-            <xlp-select-file background @path="${this.loadFile}"><xlp-icon>upload_file</xlp-icon></xlp-select-file>
+            <xlp-select-file background @path="${this.loadFile}"
+              ><xlp-icon>upload_file</xlp-icon></xlp-select-file
+            >
             <xlp-tool-bar role="navigation" hide-after="2000">
               <xlp-numeric-stepper
                 @change="${this.setVisibilityLevel}"
@@ -272,7 +307,7 @@ export class Root extends LitElement {
                 </xlp-icon-button>
               </xlp-button-group>
             </xlp-tool-bar>
-          `,
+          `
         )}
       </main>
     `;

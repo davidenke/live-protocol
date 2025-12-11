@@ -1,16 +1,26 @@
+/* eslint-disable no-console */
+import { SERIALIZE_TO_IPC_FN } from '@tauri-apps/api/core';
 import type * as ApiWindow from '@tauri-apps/api/window';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export class LogicalSize implements ApiWindow.LogicalSize {
-  public type = 'LogicalSize';
+  public readonly type = 'Logical' as const;
 
   constructor(
     public width: number,
-    public height: number,
+    public height: number
   ) {}
+
+  toJSON() {
+    return { width: this.width, height: this.height };
+  }
 
   toPhysical() {
     return {} as ApiWindow.PhysicalSize;
+  }
+
+  [SERIALIZE_TO_IPC_FN]() {
+    return { width: this.width, height: this.height };
   }
 }
 

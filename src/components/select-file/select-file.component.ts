@@ -47,7 +47,7 @@ export class SelectFile extends LitElement {
         this.draggedOver = false;
         const [path] = payload.paths;
         this.#emitPath(path);
-      }),
+      })
     );
 
     // handle click events
