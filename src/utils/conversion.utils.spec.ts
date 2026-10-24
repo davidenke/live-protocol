@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { Workbook } from 'xmind-model';
 
 import {
@@ -7,6 +7,9 @@ import {
   escapeMarkdown,
   removeLineBreaks,
 } from './conversion.utils.js';
+
+// DOCX export is not under test, and its bundled node polyfills can't be loaded by vitest
+vi.mock('@turbodocx/html-to-docx', () => ({ default: vi.fn() }));
 
 interface TopicInput {
   title: string;

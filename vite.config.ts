@@ -6,7 +6,7 @@ import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
-import { version } from './package.json';
+import { version } from './package.json' with { type: 'json' };
 
 // Vite configuration
 // https://vitejs.dev/config/

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // pnpm dlx tsx scripts/set-version.ts
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -5,7 +6,7 @@ import { parseArgs } from 'node:util';
 
 import glob from 'fast-glob';
 
-import pkg from '../package.json' assert { type: 'json' };
+import pkg from '../package.json' with { type: 'json' };
 import { getFileName } from '../src/utils/file.utils.js';
 
 // just call `npm run set:version` to use the package version

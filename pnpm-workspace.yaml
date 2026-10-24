@@ -1,0 +1,4 @@
+allowBuilds:
+  '@turbodocx/html-to-docx': true
+  esbuild: true
+  unrs-resolver: true
