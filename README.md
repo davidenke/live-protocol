@@ -56,6 +56,22 @@ Each stepper serves a different purpose:
 | Limits  | At least 1 level must be visible.                            | At maximum 6 levels can be shown as headlines. | No limits for the number of levels, but numbering will be crazy if too many levels are selected. | No limits for the number of levels whatsoever.                   |
 | Default | An infinite number of levels is shown.                       | The first 2 levels are shown as headlines.     | Up to the first 4 levels are shown as numbered lists.                                            | All levels above are shown as bullet lists.                      |
 
+#### Filtering topics
+
+Some topics of a mind map are not meant to be part of the protocol. They are omitted automatically, as long as the filter button in the tool bar is switched on (default):
+
+- **Placeholder topics**: blank topics and topics still carrying the default title given by XMind (e.g. _Subtopic 3_).
+- **Empty headlines**: topics rendered as headline without any subtopics (e.g. _short break_). The root topic is always kept.
+
+Additionally, topics can be controlled by assigning labels to them in XMind (case-insensitive):
+
+| Label                                    | Effect                                                                                                    |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `nicht im Protokoll` / `not in protocol` | The topic and all of its subtopics are omitted, e.g. for backlogs, links or template branches.            |
+| `intern` / `internal`                    | The topic title is kept, but all subtopics are replaced by the note _intern besprochen – ohne Protokoll_. |
+
+Topic titles are always rendered literally, i.e. characters which would otherwise be interpreted as Markdown (like `9. Sitzung` becoming a numbered list) are escaped.
+
 ---
 
 ## Development

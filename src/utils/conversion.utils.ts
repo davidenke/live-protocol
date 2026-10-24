@@ -35,6 +35,34 @@ export interface ConversionOptions {
    * @default Infinity
    */
   useUnorderedListsUntilLevel: number;
+
+  /**
+   * Topics carrying one of these labels (case-insensitive) are omitted
+   * from the protocol, including all of their subtopics.
+   * @default ['nicht im protokoll', 'not in protocol']
+   */
+  excludeLabels: string[];
+
+  /**
+   * Topics carrying one of these labels (case-insensitive) keep their own
+   * title, but all of their subtopics are replaced by the internal placeholder.
+   * @default ['intern', 'internal']
+   */
+  internalLabels: string[];
+
+  /**
+   * Text rendered in place of the subtopics of internal topics.
+   * @default 'intern besprochen – ohne Protokoll'
+   */
+  internalPlaceholder: string;
+
+  /**
+   * Filter topics not meant to be part of the protocol:
+   * placeholder topics, empty headlines (except the root topic),
+   * as well as topics with exclude or internal labels.
+   * @default true
+   */
+  filterTopics: boolean;
 }
 
 export function conversionOptionsWithDefaults(
@@ -45,6 +73,10 @@ export function conversionOptionsWithDefaults(
     useHeadlinesUntilLevel: 2,
     useOrderedListsUntilLevel: 4,
     useUnorderedListsUntilLevel: Infinity,
+    excludeLabels: ['nicht im protokoll', 'not in protocol'],
+    internalLabels: ['intern', 'internal'],
+    internalPlaceholder: 'intern besprochen – ohne Protokoll',
+    filterTopics: true,
     ...options,
   };
 }
@@ -52,11 +84,11 @@ export function conversionOptionsWithDefaults(
 /**
  * Convert a given set of sheets into markdown
  */
-export function convertToMarkdown(mindMap: MindMap, options?: ConversionOptions): string {
-  options = conversionOptionsWithDefaults(options);
+export function convertToMarkdown(mindMap: MindMap, options?: Partial<ConversionOptions>): string {
+  const resolved = conversionOptionsWithDefaults(options);
   return mindMap
     .getSheets()
-    .map(sheet => convertSheetToMarkdown(sheet, options))
+    .map(sheet => convertSheetToMarkdown(sheet, resolved))
     .join('\n\n');
 }
 
@@ -76,6 +108,8 @@ export async function convertToDocx(html: string): Promise<Uint8Array> {
     table: { row: { cantSplit: true } },
     footer: true,
     pageNumber: true,
+    // a4 portrait in twip (defaults to us letter otherwise)
+    pageSize: { width: 11906, height: 16838 },
     font: '',
     preprocessing: { skipHTMLMinify: false },
   });
@@ -89,6 +123,38 @@ export function convertSheetToMarkdown(sheet: Sheet, options: ConversionOptions)
 }
 
 /**
+ * Normalizes a label for comparison
+ */
+const normalizeLabel = (label: string): string => label.trim().toLowerCase();
+
+/**
+ * Checks if a topic carries at least one of the given labels (case-insensitive)
+ */
+export function hasLabel(topic: Topic, labels: string[]): boolean {
+  const wanted = labels.map(normalizeLabel);
+  return (topic.getLabels() ?? []).some(label => wanted.includes(normalizeLabel(label)));
+}
+
+/**
+ * Placeholder topics are either blank or still carry the default title
+ * given by XMind (e.g. "Subtopic 3" or "Unterknoten 3").
+ */
+export function isPlaceholderTopic(topic: Topic): boolean {
+  const { titleUnedited } = topic.toJSON() as { titleUnedited?: boolean };
+  return titleUnedited === true || (topic.getTitle() ?? '').trim() === '';
+}
+
+/**
+ * Determines whether a topic (and all of its subtopics) shall be rendered at all
+ */
+export function isVisibleTopic(topic: Topic, options: ConversionOptions): boolean {
+  if (!options.filterTopics) {
+    return true;
+  }
+  return !isPlaceholderTopic(topic) && !hasLabel(topic, options.excludeLabels);
+}
+
+/**
  * Convert a single given topic into markdown.
  */
 export function convertTopicToMarkdown(
@@ -96,16 +162,29 @@ export function convertTopicToMarkdown(
   level: number,
   options: ConversionOptions
 ): string {
-  const { useUntilLevel } = options;
+  const { useUntilLevel, useHeadlinesUntilLevel, filterTopics } = options;
   const text = convertTopicByLevel(topic, level, options);
   if (level >= useUntilLevel) {
     return text;
   }
 
+  // internal topics keep their title, but hide all details
+  if (filterTopics && hasLabel(topic, options.internalLabels)) {
+    return `${text}${convertTitleByLevel(options.internalPlaceholder, level + 1, options)}`;
+  }
+
   const attachedTopics = topic
     .getChildrenByType(['attached'])
+    .filter(child => isVisibleTopic(child, options))
     .map(child => convertTopicToMarkdown(child, level + 1, options))
     .join('');
+
+  // omit headlines without contents (but always keep the root topic)
+  const isHeadline = level <= useHeadlinesUntilLevel;
+  if (filterTopics && isHeadline && level > 1 && attachedTopics === '') {
+    return '';
+  }
+
   return `${text}${attachedTopics}`;
 }
 
@@ -114,9 +193,16 @@ export function convertTopicByLevel(
   level: number,
   options: ConversionOptions
 ): string {
+  return convertTitleByLevel(topic.getTitle() ?? '', level, options);
+}
+
+export function convertTitleByLevel(
+  title: string,
+  level: number,
+  options: ConversionOptions
+): string {
   const { useHeadlinesUntilLevel, useOrderedListsUntilLevel, useUnorderedListsUntilLevel } =
     options;
-  const title = topic.getTitle() ?? '';
 
   // headlines come first, as they can not be within lists
   if (level <= useHeadlinesUntilLevel) {
@@ -145,7 +231,7 @@ export function convertTopicByLevel(
  */
 export function renderHeadline(text: string, level: number): string {
   const hN = '#'.repeat(level);
-  return `${hN} ${removeLineBreaks(text)}\n`;
+  return `${hN} ${toInlineMarkdown(text)}\n`;
 }
 
 /**
@@ -154,7 +240,7 @@ export function renderHeadline(text: string, level: number): string {
 export function renderListItem(text: string, depth: number, ordered = false): string {
   const inset = ''.padStart((depth - 1) * 4, ' ');
   const bullet = ordered ? '1.' : '*';
-  return `${inset}${bullet} ${removeLineBreaks(text)}\n`;
+  return `${inset}${bullet} ${toInlineMarkdown(text)}\n`;
 }
 
 /**
@@ -163,12 +249,34 @@ export function renderListItem(text: string, depth: number, ordered = false): st
 export function renderText(text: string, depth: number): string {
   // TODO implement me
   const inset = ''.padStart((depth - 1) * 4, ' ');
-  return `${inset}→ ${removeLineBreaks(text)}\n`;
+  return `${inset}→ ${toInlineMarkdown(text)}\n`;
 }
 
 /**
- * Removes line breaks from a given string
+ * Replaces line breaks (and surrounding whitespace) within a given string by a single space
  */
 export function removeLineBreaks(text: string): string {
-  return text.replace(/(\r\n|\n|\r)/gm, '');
+  return text.replace(/\s*(\r\n|\n|\r)+\s*/g, ' ').trim();
+}
+
+/**
+ * Escapes characters which would otherwise be interpreted as markdown syntax,
+ * so that topic titles are always rendered literally.
+ */
+export function escapeMarkdown(text: string): string {
+  return (
+    text
+      // inline syntax: emphasis, code, links, html, strikethrough, tables
+      .replace(/[\\`*_[\]<>~|]/g, '\\$&')
+      // block syntax at the start: ordered lists (e.g. "9. Sitzung"), bullets, headlines
+      .replace(/^(\d+)([.)])(?=\s|$)/, '$1\\$2')
+      .replace(/^([-+#=])/, '\\$1')
+  );
+}
+
+/**
+ * Prepares a topic title to be used as inline markdown
+ */
+export function toInlineMarkdown(text: string): string {
+  return escapeMarkdown(removeLineBreaks(text));
 }

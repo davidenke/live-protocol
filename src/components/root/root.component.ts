@@ -15,7 +15,12 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { when } from 'lit/directives/when.js';
 
 import type { ConversionOptions, MindMap } from '../../utils/conversion.utils.js';
-import { convertToDocx, convertToHtml, convertToMarkdown } from '../../utils/conversion.utils.js';
+import {
+  conversionOptionsWithDefaults,
+  convertToDocx,
+  convertToHtml,
+  convertToMarkdown,
+} from '../../utils/conversion.utils.js';
 import { exportFile, getFileName, readAndWatchFile } from '../../utils/file.utils.js';
 import { readMindMap } from '../../utils/xmind.utils.js';
 
@@ -29,12 +34,7 @@ export class Root extends LitElement {
   readonly #listeners: (() => void)[] = [];
 
   @state()
-  conversionOptions: ConversionOptions = {
-    useUntilLevel: Infinity,
-    useHeadlinesUntilLevel: 2,
-    useOrderedListsUntilLevel: 4,
-    useUnorderedListsUntilLevel: Infinity,
-  };
+  conversionOptions: ConversionOptions = conversionOptionsWithDefaults();
 
   @state()
   private mindMap?: MindMap;
@@ -137,6 +137,19 @@ export class Root extends LitElement {
         this.conversionOptions.useUntilLevel,
         value ?? Infinity
       ),
+    };
+
+    if (this.contents === undefined) {
+      return;
+    }
+    this.#renderContents(this.contents.path);
+  }
+
+  @eventOptions({ passive: true })
+  toggleTopicFilter() {
+    this.conversionOptions = {
+      ...this.conversionOptions,
+      filterTopics: !this.conversionOptions.filterTopics,
     };
 
     if (this.contents === undefined) {
@@ -277,6 +290,17 @@ export class Root extends LitElement {
               >
                 <xlp-icon>format_list_bulleted</xlp-icon>
               </xlp-numeric-stepper>
+
+              <xlp-icon-button
+                badge="${this.conversionOptions.filterTopics ? 'on' : 'off'}"
+                title="Filter placeholder, empty and labeled topics"
+                aria-pressed="${this.conversionOptions.filterTopics}"
+                @click="${this.toggleTopicFilter}"
+              >
+                <xlp-icon>
+                  ${this.conversionOptions.filterTopics ? 'filter_alt' : 'filter_alt_off'}
+                </xlp-icon>
+              </xlp-icon-button>
 
               <xlp-button-group orientation="vertical">
                 <xlp-icon-button
