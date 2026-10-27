@@ -1,5 +1,11 @@
 # Live Protocol
 
+## 0.5.5 (2026-10-27)
+
+### Bug Fixes
+
+* align tauri crates and vite 8 minify ([0296aa1](https://github.com/davidenke/live-protocol/commit/0296aa123c61c81120f69261d07d35619b6d2e9a))
+
 ## 0.5.4 (2026-10-25)
 
 ## 0.5.3 (2025-12-11)
