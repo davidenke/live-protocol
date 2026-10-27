@@ -64,15 +64,5 @@
     "url": "git+https://github.com/davidenke/live-protocol.git"
   },
   "license": "MIT",
-  "packageManager": "pnpm@12.15.0",
-  "pnpm": {
-    "patchedDependencies": {
-      "eslint-plugin-simple-import-sort": "patches/eslint-plugin-simple-import-sort.patch"
-    },
-    "onlyBuiltDependencies": [
-      "@turbodocx/html-to-docx",
-      "esbuild",
-      "unrs-resolver"
-    ]
-  }
+  "packageManager": "pnpm@12.15.0"
 }
